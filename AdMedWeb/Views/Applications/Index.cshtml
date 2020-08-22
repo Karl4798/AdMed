@@ -1,0 +1,33 @@
+﻿<div class="backgroundWhite" style="border-radius:20px;">
+    <div class="row">
+        <div class="col-6">
+            <h2 class="text-info">Applications</h2>
+        </div>
+        <div class="col-6 text-right">
+            <a asp-action="Upsert" class="btn btn-primary text-white"><i class="fas fa-plus"></i> &nbsp; Create New Admission</a>
+        </div>
+    </div>
+    <br />
+    <br />
+    <table id="tblData" class="table table-striped table-bordered" style="width:100%">
+            <thead>
+                <tr class="table-danger">
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Gender</th>
+                    <th>Date of Birth</th>
+                    <th>Identity Number</th>
+                    <th>Home Telephone Number</th>
+                    <th>Work Telephone Number</th>
+                    <th>Cell Telephone Number</th>
+                    <th></th>
+                </tr>
+            </thead>
+        </table>
+</div>
+
+@section scripts {
+    
+    <script src="~/js/applications.js"></script>
+
+}

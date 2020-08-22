@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AdMedAPI</name>
+    </assembly>
+    <members>
+        <member name="M:AdMedAPI.Controllers.ApplicationsController.GetApplications">
+            <summary>
+            Get list of applications.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AdMedAPI.Controllers.ApplicationsController.GetApplication(System.Int32)">
+            <summary>
+            Get individual application
+            </summary>
+            <param name="ApplicationId">The Id of the application</param>
+            <returns></returns>
+        </member>
+        <member name="M:AdMedAPI.Controllers.EmergencyContactsController.GetEmergencyContacts">
+            <summary>
+            Get list of EmergencyContacts.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AdMedAPI.Controllers.EmergencyContactsController.GetEmergencyContact(System.Int32)">
+            <summary>
+            Get individual EmergencyContact
+            </summary>
+            <param name="EmergencyContactId">The Id of the EmergencyContact</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
