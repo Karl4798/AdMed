@@ -84,7 +84,7 @@ namespace AdMedAPI.Controllers
         }
 
         /// <summary>
-        /// Create application.
+        /// Create a new application.
         /// </summary>
         /// <returns></returns>
         [HttpPost]
