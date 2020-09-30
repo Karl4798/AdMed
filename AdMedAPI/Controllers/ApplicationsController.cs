@@ -28,7 +28,11 @@ namespace AdMedAPI.Controllers
 
         }
 
-        
+
+        /// <summary>
+        /// Fetches a list of all application.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Authorize(Roles = "Admin")]
         [ProducesResponseType(200, Type = typeof(List<ApplicationUpdateDto>))]
