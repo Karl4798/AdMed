@@ -83,15 +83,15 @@ namespace AdMedAPI.Controllers
 
         }
 
+        /// <summary>
+        /// Create application.
+        /// </summary>
+        /// <returns></returns>
         [HttpPost]
         [ProducesResponseType(201, Type = typeof(ApplicationCreateDto))]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        /// <summary>
-        /// Create application.
-        /// </summary>
-        /// <returns></returns>
         public IActionResult CreateApplication([FromBody] ApplicationCreateDto ApplicationDto)
         {
 
