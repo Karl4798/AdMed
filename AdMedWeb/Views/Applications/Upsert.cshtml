@@ -1,208 +1,314 @@
 ﻿@model AdMedWeb.Models.Application
 
-@{
-    var title = "Application";
-}
-
 <form method="post" asp-action="Upsert">
 
     <div class="row px-2 mx-2 backgroundWhite border">
-        
+
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
         @if (Model.Id != 0)
         {
             <input type="hidden" asp-for="Id" />
-            title = "Edit Application";
+            <input type="hidden" asp-for="PrimaryContact.Id" />
         }
 
-        <div class="col-12 p-3">
-            <h2 class="text-primary">@title</h2>
-        </div>
-        <div class="col-8">
-            <div class="form-group row">
-                <div class="col-4">
-                    <label asp-for="LastName"></label>
-                </div>
-                <div class="col-8">
-                    <input asp-for="LastName" class="form-control" />
-                    <span asp-validation-for="LastName" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group row">
-                <div class="col-4">
-                    <label asp-for="FirstName"></label>
-                </div>
-                <div class="col-8">
-                    <input asp-for="FirstName" class="form-control" />
-                    <span asp-validation-for="FirstName" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group row">
-                <div class="col-4">
-                    <label asp-for="Gender"></label>
-                </div>
-                <div class="col-8">
-                    <select asp-for="Gender" asp-items="Html.GetEnumSelectList<Application.Genders>()" class="form-control"></select>
-                </div>
-            </div>
-            <div class="form-group row">
-                <div class="col-4">
-                    <label asp-for="Allergies"></label>
-                </div>
-                <div class="col-8">
-                    <input asp-for="Allergies" class="form-control" />
-                    <span asp-validation-for="Allergies" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group row">
-                <div class="col-4">
-                    <label asp-for="DateOfBirth"></label>
-                </div>
-                <div class="col-8">
 
-                    @{
-                        var dateEst = "";
-                        if (Model.Id != 0)
-                        {
-                            dateEst = Model.DateOfBirth.ToShortDateString();
-                        }
-                    }
-
-                    <input id="datepicker" value="@dateEst" type="text" asp-for="@Model.DateOfBirth" class="form-control" />
-                </div>
+        <div style="float: left; width: 50%">
+            <div class="col-12 p-3">
+                <h2 class="text-primary">Resident</h2>
             </div>
-            <div class="form-group row">
-                <div class="col-4">
-                    <label asp-for="IdentityNumber"></label>
-                </div>
-                <div class="col-8">
-                    <input asp-for="IdentityNumber" class="form-control" />
-                    <span asp-validation-for="IdentityNumber" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group row">
-                <div class="col-4">
-                    <label asp-for="MedicalAid"></label>
-                </div>
-                <div class="col-8">
-                    <input asp-for="MedicalAid" class="form-control" />
-                    <span asp-validation-for="MedicalAid" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group row">
-                <div class="col-4">
-                    <label asp-for="MedicalAidNumber"></label>
-                </div>
-                <div class="col-8">
-                    <input asp-for="MedicalAidNumber" class="form-control" />
-                    <span asp-validation-for="MedicalAidNumber" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group row">
-                <div class="col-4">
-                    <label asp-for="DoctorName"></label>
-                </div>
-                <div class="col-8">
-                    <input asp-for="DoctorName" class="form-control" />
-                    <span asp-validation-for="DoctorName" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group row">
-                <div class="col-4">
-                    <label asp-for="HomeTelephoneNumber"></label>
-                </div>
-                <div class="col-8">
-                    <input asp-for="HomeTelephoneNumber" class="form-control" />
-                    <span asp-validation-for="HomeTelephoneNumber" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group row">
-                <div class="col-4">
-                    <label asp-for="WorkTelephoneNumber"></label>
-                </div>
-                <div class="col-8">
-                    <input asp-for="WorkTelephoneNumber" class="form-control" />
-                    <span asp-validation-for="WorkTelephoneNumber" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group row">
-                <div class="col-4">
-                    <label asp-for="CellTelephoneNumber"></label>
-                </div>
-                <div class="col-8">
-                    <input asp-for="CellTelephoneNumber" class="form-control" />
-                    <span asp-validation-for="CellTelephoneNumber" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group row">
-                <div class="col-4">
-                    <label asp-for="Undertaker"></label>
-                </div>
-                <div class="col-8">
-                    <input asp-for="Undertaker" class="form-control" />
-                    <span asp-validation-for="Undertaker" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group row">
-                <div class="col-4">
-                    <label asp-for="UndertakerTelephoneNumber"></label>
-                </div>
-                <div class="col-8">
-                    <input asp-for="UndertakerTelephoneNumber" class="form-control" />
-                    <span asp-validation-for="UndertakerTelephoneNumber" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group row">
-                <div class="col-4">
-                    <label asp-for="PharmacyName"></label>
-                </div>
-                <div class="col-8">
-                    <input asp-for="PharmacyName" class="form-control" />
-                    <span asp-validation-for="PharmacyName" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group row">
-                <div class="col-4">
-                    <label asp-for="PharmacyTelephoneNumber"></label>
-                </div>
-                <div class="col-8">
-                    <input asp-for="PharmacyTelephoneNumber" class="form-control" />
-                    <span asp-validation-for="PharmacyTelephoneNumber" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group row">
-                <div class="col-4">
-                    <label asp-for="PharmacyFaxNumber"></label>
-                </div>
-                <div class="col-8">
-                    <input asp-for="PharmacyFaxNumber" class="form-control" />
-                    <span asp-validation-for="PharmacyFaxNumber" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group row">
-                @if (!User.Identity.IsAuthenticated)
-                {
-                    <div class="col-4 offset-8">
-                        <button type="submit" class="btn-custom">
-                            @(Model.Id != 0 ? "Update" : "Next")
-                        </button>
-                    </div>
-                }
-                else
-                {
-                    <div class="col-4 offset-4">
-                        <button type="submit" class="btn-custom form-control" style="text-align: center;">
-                            @(Model.Id != 0 ? "Update" : "Create")
-                        </button>
-                    </div>
-                }
-                @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
-                {
+            <div class="col-10">
+                <div class="form-group row">
                     <div class="col-4">
-                        <a asp-action="Index" class="btn-custom form-control" style="text-align: center;">Back to List</a>
+                        <label asp-for="FirstName"></label>
                     </div>
-                }
+                    <div class="col-8">
+                        <input asp-for="FirstName" class="form-control" />
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="LastName"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="LastName" class="form-control" />
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Gender"></label>
+                    </div>
+                    <div class="col-8">
+                        <select asp-for="Gender" asp-items="Html.GetEnumSelectList<Application.Genders>()" class="form-control"></select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Allergies"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Allergies" class="form-control" />
+                        <span asp-validation-for="Allergies" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="DateOfBirth"></label>
+                    </div>
+                    <div class="col-8">
+
+                        @{
+                            var dateEst = "";
+                            if (Model.Id != 0)
+                            {
+                                dateEst = Model.DateOfBirth.ToShortDateString();
+                            }
+                        }
+
+                        <input id="datepicker" value="@dateEst" type="text" asp-for="@Model.DateOfBirth" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="IdentityNumber"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="IdentityNumber" class="form-control" />
+                        <span asp-validation-for="IdentityNumber" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="MedicalAid"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="MedicalAid" class="form-control" />
+                        <span asp-validation-for="MedicalAid" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="MedicalAidNumber"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="MedicalAidNumber" class="form-control" />
+                        <span asp-validation-for="MedicalAidNumber" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="DoctorName"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="DoctorName" class="form-control" />
+                        <span asp-validation-for="DoctorName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="HomeTelephoneNumber"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="HomeTelephoneNumber" class="form-control" />
+                        <span asp-validation-for="HomeTelephoneNumber" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="WorkTelephoneNumber"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="WorkTelephoneNumber" class="form-control" />
+                        <span asp-validation-for="WorkTelephoneNumber" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="CellTelephoneNumber"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="CellTelephoneNumber" class="form-control" />
+                        <span asp-validation-for="CellTelephoneNumber" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Undertaker"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Undertaker" class="form-control" />
+                        <span asp-validation-for="Undertaker" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="UndertakerTelephoneNumber"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="UndertakerTelephoneNumber" class="form-control" />
+                        <span asp-validation-for="UndertakerTelephoneNumber" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="PharmacyName"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="PharmacyName" class="form-control" />
+                        <span asp-validation-for="PharmacyName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="PharmacyTelephoneNumber"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="PharmacyTelephoneNumber" class="form-control" />
+                        <span asp-validation-for="PharmacyTelephoneNumber" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="PharmacyFaxNumber"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="PharmacyFaxNumber" class="form-control" />
+                        <span asp-validation-for="PharmacyFaxNumber" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div style="float: right; width: 50%;">
+            <div class="col-12 p-3">
+                <h2 class="text-primary">Primary Contact</h2>
+            </div>
+            <div class="col-10">
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="PrimaryContact.FirstName"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="PrimaryContact.FirstName" class="form-control" />
+                        <span asp-validation-for="PrimaryContact.FirstName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="PrimaryContact.LastName"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="PrimaryContact.LastName" class="form-control" />
+                        <span asp-validation-for="PrimaryContact.LastName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="PrimaryContact.Relationship"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="PrimaryContact.Relationship" class="form-control" />
+                        <span asp-validation-for="PrimaryContact.Relationship" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="PrimaryContact.PhysicalAddress"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="PrimaryContact.PhysicalAddress" class="form-control" />
+                        <span asp-validation-for="PrimaryContact.PhysicalAddress" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="PrimaryContact.PostalAddress"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="PrimaryContact.PostalAddress" class="form-control" />
+                        <span asp-validation-for="PrimaryContact.PostalAddress" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="PrimaryContact.PostCode"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="PrimaryContact.PostCode" class="form-control" />
+                        <span asp-validation-for="PrimaryContact.PostCode" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="PrimaryContact.IdentityNumber"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="PrimaryContact.IdentityNumber" class="form-control" />
+                        <span asp-validation-for="PrimaryContact.IdentityNumber" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="PrimaryContact.HomeTelephoneNumber"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="PrimaryContact.HomeTelephoneNumber" class="form-control" />
+                        <span asp-validation-for="PrimaryContact.HomeTelephoneNumber" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="PrimaryContact.WorkTelephoneNumber"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="PrimaryContact.WorkTelephoneNumber" class="form-control" />
+                        <span asp-validation-for="PrimaryContact.WorkTelephoneNumber" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="PrimaryContact.CellTelephoneNumber"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="PrimaryContact.CellTelephoneNumber" class="form-control" />
+                        <span asp-validation-for="PrimaryContact.CellTelephoneNumber" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="PrimaryContact.Email"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="PrimaryContact.Email" class="form-control" />
+                        <span asp-validation-for="PrimaryContact.Email" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row" style="padding-top: 15%;">
+                    <div class="col-4"></div>
+                    <div class="col-8">
+                        @if (!User.Identity.IsAuthenticated)
+                        {
+
+                            <button type="submit" class="btn-custom form-control" style="text-align: center;">
+                                @(Model.Id != 0 ? "Update" : "Submit")
+                            </button>
+                        }
+                        else
+                        {
+                            <button type="submit" class="btn-custom form-control" style="text-align: center;">
+                                @(Model.Id != 0 ? "Update" : "Create")
+                            </button>
+                        }
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                        {
+                            <button asp-action="Index" class="btn-custom form-control" style="text-align: center; margin-top: 5%;">Back to List</button>
+                        }
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>

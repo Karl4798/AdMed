@@ -580,9 +580,9 @@ pre {
     }
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1500px) {
     .container, .container-sm, .container-md, .container-lg, .container-xl {
-        max-width: 1500px;
+        max-width: 1800px;
     }
 }
 

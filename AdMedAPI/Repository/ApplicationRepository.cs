@@ -3,6 +3,7 @@ using System.Linq;
 using AdMedAPI.Data;
 using AdMedAPI.Models;
 using AdMedAPI.Repository.IRepository;
+using Microsoft.EntityFrameworkCore;
 
 namespace AdMedAPI.Repository
 {
@@ -18,12 +19,12 @@ namespace AdMedAPI.Repository
 
         public ICollection<Application> GetApplications()
         {
-            return _db.Applications.OrderBy(a => a.Id).ToList();
+            return _db.Applications.Include(a => a.PrimaryContact).OrderBy(a => a.Id).ToList();
         }
 
         public Application GetApplication(int applicationId)
         {
-            return _db.Applications.FirstOrDefault(a => a.Id == applicationId);
+            return _db.Applications.Include(a => a.PrimaryContact).FirstOrDefault(a => a.Id == applicationId);
         }
 
         public bool ApplicationExists(string identityNumber)

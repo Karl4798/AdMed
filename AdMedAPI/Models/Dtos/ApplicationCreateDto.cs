@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 using static AdMedAPI.Models.Application;
@@ -29,9 +30,10 @@ namespace AdMedAPI.Models.Dtos
         [Required] public string PharmacyName { get; set; }
         [Required] public string PharmacyTelephoneNumber { get; set; }
         [Required] public string PharmacyFaxNumber { get; set; }
+        [Required] public int PrimaryContactId { get; set; }
+        [ForeignKey("PrimaryContactId")] public virtual PrimaryContact PrimaryContact { get; set; }
 
-        // General information of the emergency contact included in EmergencyContact
-
+        // General information of the primary contact included in PrimaryContact
 
     }
 }

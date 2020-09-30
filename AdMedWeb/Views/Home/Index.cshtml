@@ -1,3 +1,11 @@
-﻿<div style="text-align: center;" >
-    <h1 style="font-size: 75px;">AdMed</h1>
-</div>
+﻿@{
+    ViewData["Title"] = "Home";
+}
+
+<body>
+    <div class="videoBgWrapper">
+        <video loop muted autoplay poster="~/video/index.mp4" class="videoBg" playsinline>
+            <source src="~/video/index.mp4" type="video/mp4">
+        </video>
+    </div>
+</body>

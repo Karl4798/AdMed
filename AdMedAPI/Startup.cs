@@ -1,3 +1,4 @@
+using System.IO;
 using System.Text;
 using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -33,8 +34,11 @@ namespace AdMedAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCors();
-            services.AddDbContext<ApplicationDbContext>
-                (options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            string path = Directory.GetCurrentDirectory();
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("DefaultConnection")
+                        .Replace("[DataDirectory]", path)));
 
             services.AddScoped<IApplicationRepository, ApplicationRepository>();
             services.AddScoped<IEmergencyContactRepository, EmergencyContactRepository>();

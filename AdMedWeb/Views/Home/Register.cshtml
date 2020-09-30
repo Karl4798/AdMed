@@ -6,6 +6,7 @@
 
 <h1>Register</h1>
 <form method="post" style="width: 500px;">
+    <p style="color: red"><strong>@TempData["Error"]</strong></p>
     <div class="form-group">
         <label for="exampleInputEmail1">Email address</label>
         <input asp-for="Username" type="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter email">

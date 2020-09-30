@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -32,6 +33,7 @@ namespace AdMedAPI.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         [ProducesResponseType(200, Type = typeof(List<ApplicationUpdateDto>))]
         public IActionResult GetApplications()
         {
@@ -57,7 +59,7 @@ namespace AdMedAPI.Controllers
         [HttpGet("{ApplicationId:int}", Name="GetApplication")]
         [ProducesResponseType(200, Type = typeof(ApplicationUpdateDto))]
         [ProducesResponseType(404)]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [ProducesDefaultResponseType]
         public IActionResult GetApplication(int ApplicationId)
         {
@@ -86,6 +88,10 @@ namespace AdMedAPI.Controllers
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        /// <summary>
+        /// Get list of applications.
+        /// </summary>
+        /// <returns></returns>
         public IActionResult CreateApplication([FromBody] ApplicationCreateDto ApplicationDto)
         {
 
@@ -119,7 +125,7 @@ namespace AdMedAPI.Controllers
         [ProducesResponseType(204)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public IActionResult UpdateApplication(int ApplicationId, [FromBody] ApplicationUpdateDto ApplicationDto)
         {
 
@@ -146,7 +152,7 @@ namespace AdMedAPI.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public IActionResult DeleteApplication(int ApplicationId)
         {
 

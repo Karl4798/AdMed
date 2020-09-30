@@ -1,10 +1,11 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using AdMedWeb.Models;
 using AdMedWeb.Repository.IRepository;
-using Newtonsoft.Json;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 namespace AdMedWeb.Controllers
 {
@@ -13,10 +14,15 @@ namespace AdMedWeb.Controllers
     {
 
         private readonly IApplicationRepository _apRepo;
+        private readonly IEmailSender _emailSender;
 
-        public ApplicationsController(IApplicationRepository apRepo)
+        // GUID used for contact page
+        private static Guid guid;
+
+        public ApplicationsController(IApplicationRepository apRepo, IEmailSender emailSender)
         {
             _apRepo = apRepo;
+            _emailSender = emailSender;
         }
 
         public IActionResult Index()
@@ -35,14 +41,21 @@ namespace AdMedWeb.Controllers
                 return View(obj);
             }
 
-            obj = await GetUpdate(obj, id);
-
+            obj = await Update(obj, id);
             if (obj == null)
             {
-                return NotFound();
+                return RedirectToAction("Error", "Home");
             }
 
             return View(obj);
+        }
+
+        [Authorize("Admin")]
+        private async Task<Application> Update(Application obj, int? id)
+        {
+            obj = await GetUpdate(obj, id);
+
+            return obj;
         }
 
         [Authorize(Roles = "Admin")]
@@ -66,14 +79,26 @@ namespace AdMedWeb.Controllers
 
                 if (obj.Id == 0)
                 {
-                    TempData.Put<Application>("Application", obj);
-                    return RedirectToAction("Upsert", "EmergencyContacts");
-                    //await _apRepo.CreateAsync(SD.ApplicationAPIPath, obj, HttpContext.Session.GetString("JWToken"));
+                    await _apRepo.CreateAsync(SD.ApplicationAPIPath, obj, HttpContext.Session.GetString("JWToken"));
+
+                    // Gets a new GUID for the contact form
+                    guid = Guid.NewGuid();
+
+                    // Sends the email with all required information
+                    await _emailSender.SendEmailAsync("admin@testsetup.net", "Reference Number: "
+                                                                             + guid, "<h2>Email: " + obj.PrimaryContact.Email + "</h2>"
+                                                                                     + "<br>" + "<h2>Message</h2>" +
+                                                                                     "<p>" + "New Application + " + "<br>" + obj.PrimaryContact.Email + " will be contacted.</p>");
+
+                    await _emailSender.SendEmailAsync(obj.PrimaryContact.Email, "Reference Number: "
+                                                                                + guid, "<h2>Email: " + obj.PrimaryContact.Email + "</h2>"
+                                                                                        + "<br>" + "<h2>Message</h2>" +
+                                                                                        "<p>" + "New Application + " + "<br>" + obj.PrimaryContact.Email + " will be contacted.</p>");
                 }
                 else
                 {
                     await PostUpdate(obj);
-                    
+
                 }
 
                 return RedirectToAction(nameof(Index));

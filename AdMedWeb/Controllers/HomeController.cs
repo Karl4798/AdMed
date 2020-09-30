@@ -137,6 +137,7 @@ namespace AdMedWeb.Controllers
             bool result = await _accRepo.RegisterAsync(SD.AccountAPIPath + "register/", obj);
             if (result == false)
             {
+                TempData["Error"] = "Account already in use!";
                 return View();
             }
             TempData["alert"] = "Registration Successful";
