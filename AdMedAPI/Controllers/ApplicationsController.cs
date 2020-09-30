@@ -89,7 +89,7 @@ namespace AdMedAPI.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         /// <summary>
-        /// Get list of applications.
+        /// Create application.
         /// </summary>
         /// <returns></returns>
         public IActionResult CreateApplication([FromBody] ApplicationCreateDto ApplicationDto)
