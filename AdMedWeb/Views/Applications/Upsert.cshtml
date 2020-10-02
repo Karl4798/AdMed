@@ -1,5 +1,18 @@
 ﻿@model AdMedWeb.Models.Application
 
+@{
+
+    if (Model.Id != 0)
+    {
+        ViewData["Title"] = "Update Application";
+    }
+    else
+    {
+        ViewData["Title"] = "New Application";
+    }
+
+}
+
 <form method="post" asp-action="Upsert">
 
     <div class="row px-2 mx-2 backgroundWhite border">
@@ -317,7 +330,7 @@
 
 @section scripts {
     <script>
-        $(function() {
+        $(function () {
             $('#datepicker').datepicker({
                 changeMonth: true,
                 changeYear: true,
