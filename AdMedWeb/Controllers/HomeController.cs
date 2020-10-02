@@ -26,7 +26,7 @@ namespace AdMedWeb.Controllers
         private static Guid guid;
 
         public HomeController(ILogger<HomeController> logger, IApplicationRepository npRepo,
-            IEmergencyContactRepository emRepo, IAccountRepository accRepo, IEmailSender emailSender)
+            IAccountRepository accRepo, IEmailSender emailSender)
         {
 
             _accRepo = accRepo;

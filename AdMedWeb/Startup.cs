@@ -10,9 +10,7 @@ using AdMedWeb.Repository;
 using AdMedWeb.Repository.IRepository;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using IApplicationRepository = AdMedWeb.Repository.IRepository.IApplicationRepository;
-using IEmergencyContactRepository = AdMedWeb.Repository.IRepository.IEmergencyContactRepository;
 using ApplicationRepository = AdMedWeb.Repository.ApplicationRepository;
-using EmergencyContactRepository = AdMedWeb.Repository.EmergencyContactRepository;
 
 namespace AdMedWeb
 {
@@ -39,7 +37,6 @@ namespace AdMedWeb
                 });
             services.AddHttpContextAccessor();
             services.AddScoped<IApplicationRepository, ApplicationRepository>();
-            services.AddScoped<IEmergencyContactRepository, EmergencyContactRepository>();
             services.AddScoped<IAccountRepository, AccountRepository>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
