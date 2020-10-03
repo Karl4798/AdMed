@@ -17,6 +17,8 @@ namespace AdMedWeb.Models
         public string TimeSchedule { get; set; }
         [DisplayName("Notes")]
         public string Notes { get; set; }
+        [Required] public int ResidentId { get; set; }
+        public Resident Resident { get; set; }
 
     }
 

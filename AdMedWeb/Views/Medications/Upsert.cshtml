@@ -1,0 +1,144 @@
+﻿@model AdMedWeb.Models.ViewModels.MedicationViewModel
+
+@{
+
+    if (Model.Medication.Id != 0)
+    {
+        ViewData["Title"] = "Update Medication";
+    }
+    else
+    {
+        ViewData["Title"] = "New Medication";
+    }
+
+}
+
+<form method="post" asp-action="Upsert">
+
+    <div class="row px-2 mx-2 backgroundWhite border">
+
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        @if (Model.Medication.Id != 0)
+        {
+            <input type="hidden" asp-for="Medication.Id" />
+        }
+
+
+        <div style="float: left; width: 50%">
+            <div class="col-12 p-3">
+                <h2 class="text-primary">Medicine</h2>
+            </div>
+            <div class="col-10">
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Medication.Name"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Medication.Name" class="form-control" />
+                        <span asp-validation-for="Medication.Name" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Medication.Quantity"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Medication.Quantity" class="form-control" />
+                        <span asp-validation-for="Medication.Quantity" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Medication.TimeSchedule"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Medication.TimeSchedule" class="form-control" />
+                        <span asp-validation-for="Medication.TimeSchedule" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Medication.Notes"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Medication.Notes" class="form-control" />
+                        <span asp-validation-for="Medication.Notes" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="float: right; width: 50%;">
+            <div class="col-12 p-3">
+                <h2 class="text-primary">Resident</h2>
+            </div>
+            <div class="col-10">
+
+                @if (Model.Medication.Id != 0)
+                {
+
+                    <div class="form-group row">
+                        <div class="col-12">
+                            <h3>Name: @Model.Medication.Resident.FirstName @Model.Medication.Resident.LastName</h3>
+                            <h3>Identity Number: @Model.Medication.Resident.IdentityNumber</h3>
+                        </div>
+                    </div>
+
+                }
+
+                <div class="form-group row">
+                    <div class="col-4">
+                        Resident
+                    </div>
+                    <div class="col-8">
+                        @Html.DropDownListFor(m => m.Medication.ResidentId, Model.ResidentList, "-Please select a resident-", new { @class = "form-control" })
+                        <span asp-validation-for="Medication.ResidentId" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row" style="padding-top: 15%;">
+                    <div class="col-4"></div>
+                    <div class="col-8">
+                        @if (!User.Identity.IsAuthenticated)
+                        {
+
+                            <button type="submit" class="btn-custom form-control" style="text-align: center;">
+                                @(Model.Medication.Id != 0 ? "Update" : "Submit")
+                            </button>
+
+                        }
+                        else
+                        {
+
+                            <button type="submit" class="btn-custom form-control" style="text-align: center;">
+                                @(Model.Medication.Id != 0 ? "Update" : "Create")
+                            </button>
+
+                        }
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                        {
+
+                            <button asp-action="Index" class="btn-custom form-control" style="text-align: center; margin-top: 5%;">Back to List</button>
+
+                        }
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</form>
+
+@section scripts {
+    <script>
+        $(function () {
+            $('#datepicker').datepicker({
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "1800:2200"
+            });
+        })
+    </script>
+}

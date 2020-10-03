@@ -131,15 +131,6 @@ namespace AdMedWeb.Controllers
                 if (obj.Id == 0)
                 {
 
-                    Medication m = new Medication()
-                    {
-                        Name = "",
-                        Notes = "",
-                        TimeSchedule = ""
-                    };
-
-                    obj.Medication = m;
-
                     if (await _reRepo.CreateAsync(SD.ResidentAPIPath, obj, HttpContext.Session.GetString("JWToken")))
                     {
 
@@ -157,7 +148,6 @@ namespace AdMedWeb.Controllers
                                                                                             + "<br>" + "<h2>Your Application Was Successful!</h2>" +
                                                                                             "<p>" + obj.PrimaryContact.FirstName + " " + obj.PrimaryContact.LastName + " will be contacted shortly.</p>");
 
-                        System.Diagnostics.Debug.WriteLine(_applicationId);
                         await _reRepo.DeleteAsync(SD.ApplicationAPIPath, _applicationId, HttpContext.Session.GetString("JWToken"));
 
                     }
@@ -182,6 +172,7 @@ namespace AdMedWeb.Controllers
         public async Task PostUpdateResident(Resident obj)
         {
 
+            System.Diagnostics.Debug.WriteLine(obj.Id);
             await _reRepo.UpdateAsync(SD.ResidentAPIPath + obj.Id, obj, HttpContext.Session.GetString("JWToken"));
 
         }

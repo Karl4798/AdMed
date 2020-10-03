@@ -1,0 +1,33 @@
+﻿@{
+    ViewData["Title"] = "Medications";
+}
+
+<div class="backgroundWhite" style="border-radius:20px;">
+    <div class="row">
+        <div class="col-6">
+            <h2 class="text-info">Medications</h2>
+        </div>
+        <div class="col-6 text-right">
+            <a asp-action="Upsert" class="btn btn-primary text-white"><i class="fas fa-plus"></i> &nbsp; Create New Medication</a>
+        </div>
+    </div>
+    <br />
+    <br />
+    <table id="tblData" class="table table-striped table-bordered" style="width:100%">
+        <thead>
+            <tr class="table-danger">
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Identity Number</th>
+                <th>Medication Name</th>
+                <th></th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+@section scripts {
+
+    <script src="~/js/medications.js"></script>
+
+}

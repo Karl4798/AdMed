@@ -43,7 +43,6 @@ namespace AdMedWeb.Models
         [DisplayName("Pharmacy Fax Number")]
         [Required] public string PharmacyFaxNumber { get; set; }
         public PrimaryContactResident PrimaryContact { get; set; }
-        public Medication Medication { get; set; }
 
         // General information of the primary contact included in PrimaryContact
 
