@@ -79,6 +79,7 @@ namespace AdMedWeb.Controllers
 
                 if (obj.Id == 0)
                 {
+
                     await _apRepo.CreateAsync(SD.ApplicationAPIPath, obj, HttpContext.Session.GetString("JWToken"));
 
                     // Gets a new GUID for the contact form
@@ -86,18 +87,28 @@ namespace AdMedWeb.Controllers
 
                     // Sends the email with all required information
                     await _emailSender.SendEmailAsync("admin@testsetup.net", "Reference Number: "
-                                                                             + guid, "<h2>Email: " + obj.PrimaryContact.Email + "</h2>"
-                                                                                     + "<br>" + "<h2>Message</h2>" +
-                                                                                     "<p>" + "New Application + " + "<br>" + obj.PrimaryContact.Email + " will be contacted.</p>");
+                                                                                + guid, "<h2>Email: " + obj.PrimaryContact.Email + "</h2>"
+                                                                                        + "<br>" + "<h2>Your Application is Currently Pending.</h2>" +
+                                                                                        "<p>" + obj.PrimaryContact.FirstName + " " + obj.PrimaryContact.LastName + " will be contacted shortly.</p>");
 
                     await _emailSender.SendEmailAsync(obj.PrimaryContact.Email, "Reference Number: "
                                                                                 + guid, "<h2>Email: " + obj.PrimaryContact.Email + "</h2>"
-                                                                                        + "<br>" + "<h2>Message</h2>" +
-                                                                                        "<p>" + "New Application + " + "<br>" + obj.PrimaryContact.Email + " will be contacted.</p>");
+                                                                                        + "<br>" + "<h2>Your Application is Currently Pending.</h2>" +
+                                                                                        "<p>" + obj.PrimaryContact.FirstName + " " + obj.PrimaryContact.LastName + " will be contacted shortly.</p>");
+
                 }
                 else
                 {
-                    await PostUpdate(obj);
+
+                    if (obj.Approval == Enums.Approvals.Approve)
+                    {
+
+                        TempData.Put("application", obj);
+                        return RedirectToAction("Upsert", "Residents");
+
+                    }
+
+                    await PostUpdateApplication(obj);
 
                 }
 
@@ -110,7 +121,7 @@ namespace AdMedWeb.Controllers
         }
 
         [Authorize(Roles = "Admin")]
-        public async Task PostUpdate(Application obj)
+        public async Task PostUpdateApplication(Application obj)
         {
 
             await _apRepo.UpdateAsync(SD.ApplicationAPIPath + obj.Id, obj, HttpContext.Session.GetString("JWToken"));
@@ -119,22 +130,29 @@ namespace AdMedWeb.Controllers
 
         public async Task<IActionResult> GetAllApplications()
         {
+
             return Json(new {data = await _apRepo.GetAllAsync(SD.ApplicationAPIPath, HttpContext.Session.GetString("JWToken")) });
+
         }
 
         [HttpDelete]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int id)
         {
+
             var status = await _apRepo.DeleteAsync(SD.ApplicationAPIPath, id, HttpContext.Session.GetString("JWToken"));
 
             if (status)
             {
+
                 return Json(new { success = true, message = "Delete Successful" });
+
             }
 
             return Json(new { success = false, message = "Delete Not Successful" });
+
         }
 
     }
+
 }

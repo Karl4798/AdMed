@@ -36,7 +36,6 @@ namespace AdMedWeb.Controllers
 
         public async Task<IActionResult> Index()
         {
-
             return View();
         }
 

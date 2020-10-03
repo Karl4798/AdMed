@@ -7,27 +7,29 @@ $(document).ready(function () {
 function loadDataTable() {
     dataTable = $('#tblData').DataTable({
         "ajax": {
-            "url": "/trails/GetAllTrails",
+            "url": "/residents/GetAllResidents",
             "type": "GET",
             "datatype": "json"
         },
         "columns": [
-            { "data": "nationalPark.name", "width": "25%" },
-            { "data": "name", "width": "20%" },
-            { "data": "distance", "width": "15%" },
-            { "data": "elevation", "width": "15%" },
+            { "data": "firstName", "width": "10%" },
+            { "data": "lastName", "width": "10%" },
+            { "data": "genderString", "width": "10%" },
+            { "data": "dateOfBirth", "width": "10%" },
+            { "data": "identityNumber", "width": "10%" },
+            { "data": "cellTelephoneNumber", "width": "10%" },
             {
                 "data": "id",
                 "render": function (data) {
                     return `<div class="text-center">
-                                <a href="/trails/Upsert/${data}" class='btn btn-success text-white'
+                                <a href="/residents/Upsert/${data}" class='btn btn-success text-white'
                                     style='cursor:pointer;'> <i class='far fa-edit'></i></a>
                                     &nbsp;
-                                <a onclick=Delete("/trails/Delete/${data}") class='btn btn-danger text-white'
+                                <a onclick=Delete("/residents/Delete/${data}") class='btn btn-danger text-white'
                                     style='cursor:pointer;'> <i class='far fa-trash-alt'></i></a>
                                 </div>
                             `;
-                }, "width": "30%"
+                }, "width": "10%"
             }
         ]
     });

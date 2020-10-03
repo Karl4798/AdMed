@@ -1,14 +1,14 @@
-﻿@model AdMedWeb.Models.Application
+﻿@model AdMedWeb.Models.Resident
 
 @{
 
     if (Model.Id != 0)
     {
-        ViewData["Title"] = "Update Application";
+        ViewData["Title"] = "Update Resident";
     }
     else
     {
-        ViewData["Title"] = "New Application";
+        ViewData["Title"] = "New Resident";
     }
 
 }
@@ -23,12 +23,13 @@
         {
             <input type="hidden" asp-for="Id" />
             <input type="hidden" asp-for="PrimaryContact.Id" />
+            <input type="hidden" asp-for="Medication.Id" />
         }
 
 
         <div style="float: left; width: 50%">
             <div class="col-12 p-3">
-                <h2 class="text-primary">Applicant</h2>
+                <h2 class="text-primary">Resident</h2>
             </div>
             <div class="col-10">
                 <div class="form-group row">
@@ -74,7 +75,7 @@
 
                         @{
                             var dateEst = "";
-                            if (Model.Id != 0)
+                            if (Model.Id != 0 || Model.DateOfBirth != null)
                             {
                                 dateEst = Model.DateOfBirth.ToShortDateString();
                             }
@@ -312,15 +313,6 @@
                         }
                         else
                         {
-
-                            <div class="form-group row">
-                                <div class="col-4">
-                                    <label asp-for="Approval"></label>
-                                </div>
-                                <div class="col-12">
-                                    <select asp-for="Approval" asp-items="Html.GetEnumSelectList<Enums.Approvals>()" class="form-control"></select>
-                                </div>
-                            </div>
 
                             <button type="submit" class="btn-custom form-control" style="text-align: center;">
                                 @(Model.Id != 0 ? "Update" : "Create")

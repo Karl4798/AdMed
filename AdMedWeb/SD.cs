@@ -9,9 +9,10 @@ namespace AdMedWeb
     {
 
         public static string APIBaseUrl = "https://admedapi.azurewebsites.net/";
+        //public static string APIBaseUrl = "https://localhost:44399/";
         public static string ApplicationAPIPath = APIBaseUrl + "api/v1/applications/";
-        public static string EmergencyContactAPIPath = APIBaseUrl + "api/v1/emergencycontacts/";
-        public static string AccountAPIPath = APIBaseUrl + "api/v1/Users/";
+        public static string ResidentAPIPath = APIBaseUrl + "api/v1/residents/";
+        public static string AccountAPIPath = APIBaseUrl + "api/v1/users/";
 
     }
 }
