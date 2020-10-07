@@ -96,12 +96,18 @@ namespace AdMedWeb.Controllers
                                                                                         + "<br>" + "<h2>Your Application is Currently Pending.</h2>" +
                                                                                         "<p>" + obj.PrimaryContact.FirstName + " " + obj.PrimaryContact.LastName + " will be contacted shortly.</p>");
 
-                    TempData["guid"] = guid.ToString();
-                    TempData["email"] = obj.PrimaryContact.Email;
-                    TempData["firstName"] = obj.PrimaryContact.FirstName;
-                    TempData["lastName"] = obj.PrimaryContact.LastName;
+                    if (!User.Identity.IsAuthenticated)
+                    {
 
-                    return RedirectToAction(nameof(Confirmation));
+                        return RedirectToAction("Confirmation", "Applications", new
+                        {
+                            identifier = guid,
+                            email = obj.PrimaryContact.Email,
+                            firstName = obj.PrimaryContact.FirstName,
+                            lastName = obj.PrimaryContact.LastName
+                        });
+
+                    }
 
                 }
                 else
@@ -136,8 +142,14 @@ namespace AdMedWeb.Controllers
         }
 
         [AllowAnonymous]
-        public IActionResult Confirmation()
+        public IActionResult Confirmation(Guid identifier, string email, string firstName, string lastName)
         {
+
+
+            ViewBag.guid = identifier;
+            ViewBag.email = email;
+            ViewBag.firstName = firstName;
+            ViewBag.lastName = lastName;
 
             return View();
 
