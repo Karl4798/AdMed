@@ -96,6 +96,13 @@ namespace AdMedWeb.Controllers
                                                                                         + "<br>" + "<h2>Your Application is Currently Pending.</h2>" +
                                                                                         "<p>" + obj.PrimaryContact.FirstName + " " + obj.PrimaryContact.LastName + " will be contacted shortly.</p>");
 
+                    TempData["guid"] = guid.ToString();
+                    TempData["email"] = obj.PrimaryContact.Email;
+                    TempData["firstName"] = obj.PrimaryContact.FirstName;
+                    TempData["lastName"] = obj.PrimaryContact.LastName;
+
+                    return RedirectToAction(nameof(Confirmation));
+
                 }
                 else
                 {
@@ -125,6 +132,13 @@ namespace AdMedWeb.Controllers
         {
 
             await _apRepo.UpdateAsync(SD.ApplicationAPIPath + obj.Id, obj, HttpContext.Session.GetString("JWToken"));
+
+        }
+
+        public IActionResult Confirmation()
+        {
+
+            return View();
 
         }
 
