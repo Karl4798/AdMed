@@ -135,6 +135,7 @@ namespace AdMedWeb.Controllers
 
         }
 
+        [AllowAnonymous]
         public IActionResult Confirmation()
         {
 
