@@ -178,7 +178,7 @@ video {
     *::after {
         -webkit-box-sizing: border-box;
         box-sizing: content-box;
-        overflow:no-display;
+        overflow:scroll;
     }
 
     #leftContent {
