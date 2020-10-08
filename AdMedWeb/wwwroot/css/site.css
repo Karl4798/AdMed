@@ -173,14 +173,6 @@ video {
 
 @media(max-width:992px) {
 
-    *,
-    *::before,
-    *::after {
-        -webkit-box-sizing: border-box;
-        box-sizing: content-box;
-        overflow:scroll;
-    }
-
     #leftContent {
         float: none;
         width: 100%;
