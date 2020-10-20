@@ -316,13 +316,13 @@
                                 @(Model.Id != 0 ? "Update" : "Create")
                             </button>
                         }
-                        @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
-                        {
-                            <button asp-action="Index" class="btn-custom form-control" style="text-align: center; margin-top: 5%;">Back to List</button>
-                        }
                         @if (Model.Id != 0 && User.Identity.IsAuthenticated && User.IsInRole("Admin"))
                         {
                             <button asp-action="MedicationRedirect" value="@Model" class="btn-custom form-control" style="text-align: center; margin-top: 5%;">Medication</button>
+                        }
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                        {
+                            <button asp-action="Index" class="btn-custom form-control" style="text-align: center; margin-top: 5%;">Back to List</button>
                         }
                     </div>
                 </div>
