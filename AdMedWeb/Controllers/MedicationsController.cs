@@ -30,6 +30,8 @@ namespace AdMedWeb.Controllers
 
         public IActionResult Index(string residentId)
         {
+            TempData["residentId"] = null;
+            TempData["id"] = null;
 
             TempData["residentId"] = residentId;
             return View(new Medication() {});
@@ -56,6 +58,8 @@ namespace AdMedWeb.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Upsert(int? id)
         {
+
+            ViewBag.residentId = TempData["id"];
 
             IEnumerable<Resident> residentList = await _reRepo.GetAllAsync(SD.ResidentAPIPath, HttpContext.Session.GetString("JWToken"));
 
@@ -141,6 +145,15 @@ namespace AdMedWeb.Controllers
 
         }
 
+        [Authorize(Roles = "Admin")]
+        public IActionResult ResidentMedication()
+        {
+
+            var resId = TempData["residentId"];
+            return RedirectToAction("Index", "Medications", new { residentId = resId });
+
+        }
+
         public async Task<IActionResult> GetAllMedications()
         {
 
@@ -151,6 +164,7 @@ namespace AdMedWeb.Controllers
             if (TempData["residentId"] != null)
             {
                 list = list.Where(x => x.ResidentId.ToString().Equals(TempData["residentId"])).ToList();
+                TempData["id"] = TempData["residentId"];
             }
 
             return Json(new { data = list });

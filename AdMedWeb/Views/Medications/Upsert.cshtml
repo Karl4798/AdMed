@@ -22,6 +22,7 @@
         @if (Model.Medication.Id != 0)
         {
             <input type="hidden" asp-for="Medication.Id" />
+            <input type="hidden" asp-for="Medication.ResidentId" />
         }
 
 
@@ -116,7 +117,19 @@
                             </button>
 
                         }
-                        @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                        @{
+                            if (ViewBag.residentId != null)
+                            {
+                                TempData["residentId"] = ViewBag.residentId;
+                            }
+                        }
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("Admin") && ViewBag.residentId != null)
+                        {
+
+                            <button asp-action="ResidentMedication" class="btn-custom form-control" style="text-align: center; margin-top: 5%;">Back to List</button>
+
+                        }
+                        else if (User.Identity.IsAuthenticated && User.IsInRole("Admin") && ViewBag.residentId == null)
                         {
 
                             <button asp-action="Index" class="btn-custom form-control" style="text-align: center; margin-top: 5%;">Back to List</button>

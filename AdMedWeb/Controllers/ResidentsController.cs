@@ -172,12 +172,11 @@ namespace AdMedWeb.Controllers
         public async Task PostUpdateResident(Resident obj)
         {
 
-            System.Diagnostics.Debug.WriteLine(obj.Id);
             await _reRepo.UpdateAsync(SD.ResidentAPIPath + obj.Id, obj, HttpContext.Session.GetString("JWToken"));
 
         }
 
-        public async Task<IActionResult> MedicationRedirect(Resident obj)
+        public IActionResult MedicationRedirect(Resident obj)
         {
 
             return RedirectToAction("Index", "Medications", new { residentId = obj.Id });
