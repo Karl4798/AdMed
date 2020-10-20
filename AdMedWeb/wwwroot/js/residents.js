@@ -26,7 +26,7 @@ function loadDataTable() {
                                     style='cursor:pointer;'> <i class='far fa-edit'></i></a>
                                     &nbsp;
                                 <a href="/Medications/Index?residentId=${data}" class='btn btn-success text-white'
-                                    style='cursor:pointer;'> <i class='fas fa-notes-medical'></i></a>
+                                    style='cursor:pointer;'> <i class='fas fa-tablets'></i></a>
                                     &nbsp;
                                 <a onclick=Delete("/residents/Delete/${data}") class='btn btn-danger text-white'
                                     style='cursor:pointer;'> <i class='far fa-trash-alt'></i></a>
