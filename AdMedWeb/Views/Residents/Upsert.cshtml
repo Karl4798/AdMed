@@ -25,7 +25,6 @@
             <input type="hidden" asp-for="PrimaryContact.Id" />
         }
 
-
         <div id="leftContent">
             <div class="col-12 p-3">
                 <h2 class="text-primary">Resident</h2>
@@ -320,6 +319,10 @@
                         @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
                         {
                             <button asp-action="Index" class="btn-custom form-control" style="text-align: center; margin-top: 5%;">Back to List</button>
+                        }
+                        @if (Model.Id != 0 && User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                        {
+                            <button asp-action="MedicationRedirect" value="@Model" class="btn-custom form-control" style="text-align: center; margin-top: 5%;">Medication</button>
                         }
                     </div>
                 </div>

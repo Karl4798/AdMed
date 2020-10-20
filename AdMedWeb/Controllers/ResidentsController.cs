@@ -177,6 +177,13 @@ namespace AdMedWeb.Controllers
 
         }
 
+        public async Task<IActionResult> MedicationRedirect(Resident obj)
+        {
+
+            return RedirectToAction("Index", "Medications", new { residentId = obj.Id });
+
+        }
+
         public async Task<IActionResult> GetAllResidents()
         {
 

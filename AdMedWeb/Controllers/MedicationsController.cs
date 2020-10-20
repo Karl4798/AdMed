@@ -28,8 +28,10 @@ namespace AdMedWeb.Controllers
             _emailSender = emailSender;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string residentId)
         {
+
+            TempData["residentId"] = residentId;
             return View(new Medication() {});
         }
 
@@ -142,7 +144,16 @@ namespace AdMedWeb.Controllers
         public async Task<IActionResult> GetAllMedications()
         {
 
-            return Json(new {data = await _meRepo.GetAllAsync(SD.MedicationAPIPath, HttpContext.Session.GetString("JWToken")) });
+            var data = await _meRepo.GetAllAsync(SD.MedicationAPIPath, HttpContext.Session.GetString("JWToken"));
+
+            IEnumerable <Medication> list = data.ToList();
+
+            if (TempData["residentId"] != null)
+            {
+                list = list.Where(x => x.ResidentId.ToString().Equals(TempData["residentId"])).ToList();
+            }
+
+            return Json(new { data = list });
 
         }
 
