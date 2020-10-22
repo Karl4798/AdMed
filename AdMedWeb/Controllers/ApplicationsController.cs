@@ -145,7 +145,6 @@ namespace AdMedWeb.Controllers
         public IActionResult Confirmation(Guid identifier, string email, string firstName, string lastName)
         {
 
-
             ViewBag.guid = identifier;
             ViewBag.email = email;
             ViewBag.firstName = firstName;
