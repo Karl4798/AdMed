@@ -56,16 +56,16 @@
                         {
                             <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Welcome, @User.Identity.Name</a>
                             <li class="nav-item">
-                                <a class="nav-link" asp-controller="Home" asp-action="Logout">Logout</a>
+                                <a class="nav-link customlogout" asp-controller="Authentication" asp-action="Logout">Logout</a>
                             </li>
                         }
                         else
                         {
                             <li class="nav-item">
-                                <a class="nav-link" asp-controller="Home" asp-action="Register">Register</a>
+                                <a class="nav-link" asp-controller="Authentication" asp-action="Register">Register</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" asp-controller="Home" asp-action="Login">Login</a>
+                                <a class="nav-link" asp-controller="Authentication" asp-action="Login">Login</a>
                             </li>
                         }
                     </ul>
