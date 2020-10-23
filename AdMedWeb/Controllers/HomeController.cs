@@ -3,9 +3,7 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using AdMedWeb.Models;
-using AdMedWeb.Repository.IRepository;
 using Microsoft.AspNetCore.Identity.UI.Services;
 
 namespace AdMedWeb.Controllers
@@ -13,22 +11,19 @@ namespace AdMedWeb.Controllers
     public class HomeController : Controller
     {
 
-        private readonly IAccountRepository _accRepo;
         private readonly IEmailSender _emailSender;
 
         // GUID used for contact page
         private static Guid guid;
 
-        public HomeController(ILogger<HomeController> logger, IApplicationRepository npRepo,
-            IAccountRepository accRepo, IEmailSender emailSender)
+        public HomeController(IEmailSender emailSender)
         {
 
-            _accRepo = accRepo;
             _emailSender = emailSender;
 
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             return View();
         }
