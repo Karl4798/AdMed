@@ -113,7 +113,14 @@ namespace AdMedWeb.Controllers
                     await _meRepo.UpdateAsync(SD.MedicationAPIPath + obj.Medication.Id, obj.Medication, HttpContext.Session.GetString("JWToken"));
                 }
 
-                return RedirectToAction(nameof(Index));
+                if (TempData["residentId"] != null)
+                {
+                    return RedirectToAction("Index", "Medications", new { residentId = TempData["residentId"] });
+                }
+                else
+                {
+                    return RedirectToAction(nameof(Index));
+                }
 
             }
 

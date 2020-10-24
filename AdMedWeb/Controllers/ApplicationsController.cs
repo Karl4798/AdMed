@@ -98,7 +98,6 @@ namespace AdMedWeb.Controllers
 
                     if (!User.Identity.IsAuthenticated)
                     {
-
                         return RedirectToAction("Confirmation", "Applications", new
                         {
                             identifier = guid,
@@ -106,7 +105,10 @@ namespace AdMedWeb.Controllers
                             firstName = obj.PrimaryContact.FirstName,
                             lastName = obj.PrimaryContact.LastName
                         });
-
+                    }
+                    else
+                    {
+                        return RedirectToAction(nameof(Index));
                     }
 
                 }
@@ -115,17 +117,18 @@ namespace AdMedWeb.Controllers
 
                     if (obj.Approval == Enums.Approvals.Approve)
                     {
-
                         TempData.Put("application", obj);
                         return RedirectToAction("Upsert", "Residents");
-
+                    }
+                    else if (obj.Approval == Enums.Approvals.Decline)
+                    {
+                        await _apRepo.DeleteAsync(SD.ApplicationAPIPath, obj.Id, HttpContext.Session.GetString("JWToken"));
+                        return RedirectToAction(nameof(Index));
                     }
 
                     await PostUpdateApplication(obj);
 
                 }
-
-                return RedirectToAction(nameof(Index));
 
             }
 

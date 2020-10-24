@@ -17,15 +17,15 @@ namespace AdMedWeb.Models
         public string GenderString { get; set; }
         [Required] public string Allergies { get; set; }
         [DisplayName("Date of Birth")]
-        [Required] public DateTime DateOfBirth { get; set; }
+        [Required(ErrorMessage = "Date of Birth field is required.")] public DateTime DateOfBirth { get; set; }
         [DisplayName("Identity Number")]
         [Required] public string IdentityNumber { get; set; }
         [DisplayName("Medical Aid")]
         [Required] public string MedicalAid { get; set; }
         [DisplayName("Medical Aid Number")]
-        public string MedicalAidNumber { get; set; }
+        [Required] public string MedicalAidNumber { get; set; }
         [DisplayName("Doctor Name")]
-        public string DoctorName { get; set; }
+        [Required] public string DoctorName { get; set; }
         [DisplayName("Home Telephone Number")]
         public string HomeTelephoneNumber { get; set; }
         [DisplayName("Work Telephone Number")]

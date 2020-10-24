@@ -6,6 +6,7 @@ using AdMedWeb.Repository.IRepository;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -15,11 +16,13 @@ namespace AdMedWeb.Controllers
     {
 
         private readonly IAccountRepository _accRepo;
+        private readonly IEmailSender _emailSender;
 
-        public AuthenticationController(IAccountRepository accRepo)
+        public AuthenticationController(IAccountRepository accRepo, IEmailSender emailSender)
         {
 
             _accRepo = accRepo;
+            _emailSender = emailSender;
 
         }
 
@@ -66,8 +69,13 @@ namespace AdMedWeb.Controllers
             if (result == false)
             {
                 TempData["Error"] = "Account already in use!";
-                return View();
+                return View(obj);
             }
+            else
+            {
+                TempData["Error"] = null;
+            }
+
             TempData["alert"] = "Registration Successful";
             return RedirectToAction("Login");
         }
