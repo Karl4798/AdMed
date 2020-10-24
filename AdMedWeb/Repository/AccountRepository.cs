@@ -2,8 +2,14 @@
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-using AdMedWeb.Models;
 using AdMedWeb.Repository.IRepository;
+using System.Security.Claims;
+using System.Threading;
+using System.Linq;
+using AdMedWeb.Models;
+using Microsoft.AspNetCore.Http;
+using AdMedWeb.Models.ViewModels;
+using System.Net.Http.Headers;
 
 namespace AdMedWeb.Repository
 {
@@ -11,10 +17,13 @@ namespace AdMedWeb.Repository
     {
 
         private readonly IHttpClientFactory _clientFactory;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public AccountRepository(IHttpClientFactory clientFactory) : base(clientFactory)
+        public AccountRepository(IHttpClientFactory clientFactory, IHttpContextAccessor httpContextAccessor) : base(clientFactory)
         {
             _clientFactory = clientFactory;
+            _httpContextAccessor = httpContextAccessor;
+
         }
 
         public async Task<User> LoginAsync(string url, User objToLogin)
@@ -65,5 +74,35 @@ namespace AdMedWeb.Repository
 
             return false;
         }
+
+        public async Task<bool> ResetPasswordAsync(string url, ResetPasswordViewModel objToResetPassword, string token = "")
+        {
+            var request = new HttpRequestMessage(HttpMethod.Post, url);
+            if (objToResetPassword != null)
+            {
+                request.Content = new StringContent(
+                    JsonConvert.SerializeObject(objToResetPassword), Encoding.UTF8, "application/json");
+            }
+            else
+            {
+                return false;
+            }
+
+            var client = _clientFactory.CreateClient();
+            if (token != null && token.Length != 0)
+            {
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            }
+
+            HttpResponseMessage response = await client.SendAsync(request);
+
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
     }
 }

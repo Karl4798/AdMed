@@ -54,7 +54,7 @@
                            && httpAcc.HttpContext.Session.GetString("JWToken").ToString().Length > 0)
                            || User.Identity.IsAuthenticated)
                         {
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Welcome, @User.Identity.Name</a>
+                            <a class="nav-link" asp-area="" asp-controller="Account" asp-action="Upsert">Welcome, @User.Identity.Name</a>
                             <li class="nav-item">
                                 <a class="nav-link customlogout" asp-controller="Authentication" asp-action="Logout">Logout</a>
                             </li>

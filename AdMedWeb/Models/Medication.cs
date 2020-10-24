@@ -8,7 +8,6 @@ namespace AdMedWeb.Models
     {
 
         public int Id { get; set; }
-
         [DisplayName("Medication Name")]
         public string Name { get; set; }
         [DisplayName("Quantity")]

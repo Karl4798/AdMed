@@ -16,13 +16,11 @@ namespace AdMedWeb.Controllers
     {
 
         private readonly IAccountRepository _accRepo;
-        private readonly IEmailSender _emailSender;
 
-        public AuthenticationController(IAccountRepository accRepo, IEmailSender emailSender)
+        public AuthenticationController(IAccountRepository accRepo)
         {
 
             _accRepo = accRepo;
-            _emailSender = emailSender;
 
         }
 

@@ -40,6 +40,30 @@ namespace AdMedWeb.Repository
             return null;
         }
 
+        public async Task<T> GetAsync(string url, string uniqueVal, string token)
+        {
+
+            var request = new HttpRequestMessage(HttpMethod.Get, url + uniqueVal);
+
+            var client = _clientFactory.CreateClient();
+
+            if (token != null && token.Length != 0)
+            {
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            }
+
+            HttpResponseMessage response = await client.SendAsync(request);
+
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                var jsonString = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<T>(jsonString);
+            }
+
+            return null;
+
+        }
+
         public async Task<IEnumerable<T>> GetAllAsync(string url, string token = "")
         {
             var request = new HttpRequestMessage(HttpMethod.Get, url);
