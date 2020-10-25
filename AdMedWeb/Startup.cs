@@ -40,6 +40,7 @@ namespace AdMedWeb
             services.AddScoped<IResidentRepository, ResidentRepository>();
             services.AddScoped<IMedicationRepository, MedicationRepository>();
             services.AddScoped<IAccountRepository, AccountRepository>();
+            services.AddScoped<IPostRepository, PostRepository>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
 

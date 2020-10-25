@@ -9,6 +9,7 @@
         public static string ResidentAPIPath = APIBaseUrl + "api/v1/residents/";
         public static string MedicationAPIPath = APIBaseUrl + "api/v1/medications/";
         public static string AccountAPIPath = APIBaseUrl + "api/v1/users/";
+        public static string PostAPIPath = APIBaseUrl + "api/v1/posts/";
 
     }
 }

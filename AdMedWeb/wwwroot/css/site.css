@@ -74,6 +74,7 @@ body {
 
 .table-danger, .table-danger > td, .table-danger > th {
     background-color: white;
+    color: green;
 }
 
 .table-danger tbody + tbody, .table-danger td, .table-danger th, .table-danger thead th {
@@ -183,4 +184,8 @@ video {
         float: none !important;
         width: 100%;
     }
+}
+
+.customlogout:hover {
+    color: red !important;
 }

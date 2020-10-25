@@ -1,0 +1,48 @@
+﻿@model IEnumerable<AdMedWeb.Models.Post>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>News</h1>
+
+@if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+{
+    <p style="margin-top: 20px;">
+        <a asp-action="Upsert" class="btn btn-primary" style="width: 300px;">Create New</a>
+    </p>
+}
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-12" style="margin-top: 35px">
+            <div class="card">
+                <div class="card-header">
+                    Post ID: @item.Id
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">@item.PostName</h5>
+                    <p class="card-text">
+                        @{
+                            var desc = item.PostDescription;
+
+                            if (item.PostDescription.Length > 100)
+                            {
+                                desc = desc.Substring(0, 100);
+                            }
+                        }
+                        @desc...
+                    </p>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary" style="width: 100px;">Read More</a>
+                    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                    {
+                        <a asp-action="Upsert" asp-route-id="@item.Id" class="btn btn-info" style="width: 100px;">Edit</a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger" style="width: 100px;">Delete</a>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+</div>

@@ -21,7 +21,7 @@ namespace AdMedWeb.Controllers
             _httpContextAccessor = httpContextAccessor;
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,Resident")]
         public async Task<ActionResult> Upsert()
         {
             var username = User.FindFirstValue(ClaimTypes.Name);
@@ -47,7 +47,7 @@ namespace AdMedWeb.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,Resident")]
         public async Task<ActionResult> Upsert(UpdateUserViewModel uuvm)
         {
 
@@ -80,7 +80,7 @@ namespace AdMedWeb.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,Resident")]
         public async Task<ActionResult> ResetPassword()
         {
 
@@ -93,7 +93,7 @@ namespace AdMedWeb.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,Resident")]
         public async Task<ActionResult> ResetPassword(ResetPasswordViewModel rpvm)
         {
 

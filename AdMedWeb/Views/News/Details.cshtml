@@ -1,0 +1,47 @@
+﻿@model AdMedWeb.Models.Post
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Details</h1>
+
+<div class="col-md-12" style="padding: 0px;">
+    <div class="card">
+        <div class="card-header">
+            <h1 class="card-title text-black-50">@Model.PostName</h1>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">@Model.PostDescription</h5>
+            <div class="card-text">
+                @Html.Raw(Model.Content)
+            </div>
+
+            @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+            {
+                <a class="btn btn-outline-primary" asp-action="Upsert" asp-route-id="@Model.Id">Edit</a>
+            }
+            <a class="btn btn-outline-primary" asp-action="Index">Back to List</a>
+        </div>
+        <div class="card-footer text-muted">
+            @Model.TimeStamp
+        </div>
+    </div>
+    <div id="disqus_thread"></div>
+</div>
+
+@section Scripts {
+    <script>
+        var disqus_config = function () {
+        this.page.url = "https://admedweb.azurewebsites.net//Posts/Details/" + @Model.Id;  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = @Model.Id; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+        (function () { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = 'https://admed-1.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+}
