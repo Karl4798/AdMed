@@ -131,8 +131,12 @@ namespace AdMedWeb.Controllers
                 }
 
             }
+            else
+            {
+                return View(obj);
+            }
 
-            return View(obj);
+            return null;
 
         }
 

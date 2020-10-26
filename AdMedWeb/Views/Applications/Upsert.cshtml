@@ -1,7 +1,7 @@
 ﻿@model AdMedWeb.Models.Application
 
 @{
-
+    var selectedItem = "";
     if (Model.Id != 0)
     {
         ViewData["Title"] = "Update Application";
@@ -14,7 +14,6 @@
 }
 
 <form method="post" asp-action="Upsert">
-
     <div class="row px-2 mx-2 backgroundWhite border">
 
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -294,7 +293,7 @@
                     <div class="col-4">
                         <label asp-for="PrimaryContact.Email"></label>
                     </div>
-                    <div class="col-8">
+                    <div id="div1" class="col-8">
                         <input asp-for="PrimaryContact.Email" class="form-control" />
                         <span asp-validation-for="PrimaryContact.Email" class="text-danger"></span>
                     </div>
@@ -316,13 +315,13 @@
 
                             @if (Model.Id != 0)
                             {
-
                                 <div class="form-group row">
                                     <div class="col-4">
                                         <label asp-for="Approval"></label>
                                     </div>
+
                                     <div class="col-12">
-                                        <select asp-for="Approval" asp-items="Html.GetEnumSelectList<Enums.Approvals>()" class="form-control"></select>
+                                        <select id="aaaa" asp-for="Approval" asp-items="Html.GetEnumSelectList<Enums.Approvals>()" class="form-control"></select>
                                     </div>
                                 </div>
 
@@ -357,5 +356,54 @@
                 yearRange: "1800:2200"
             });
         })
+
+        function Delete(url,data) {
+            swal({
+                title: "Are you sure you want to Delete?",
+                text: "You will not be able to restore the data!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true
+            }).then((willDelete) => {
+                if (willDelete) {
+                    $.ajax({
+                        type: 'DELETE',
+                        url: url,
+                        success: function (data) {
+                            if (data.success) {
+                                toastr.success(data.message);
+                                dataTable.ajax.reload();
+                            }
+                            else {
+                                toastr.error(data.message);
+                            }
+                        }
+                    });
+                }
+            });
+        }
+
+        $(document).ready(function () {
+
+            $(document).on('change', '#aaaa', function (e) {
+                var selectedCertificate = $(this).val();
+                if (selectedCertificate == 2) {
+                    swal({
+                        title: "Declining an application will erase it.",
+                        text: "You will not be able to restore the data!",
+                        icon: "warning",
+                        dangerMode: true
+                    });
+                }
+                else if (selectedCertificate == 1) {
+                    $('#myVar').val('Approved');
+                }
+                else {
+                    $('#myVar').val('Undecided');
+                }
+            });
+        });
+
     </script>
+
 }
