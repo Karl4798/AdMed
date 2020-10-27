@@ -2,7 +2,5 @@
 
 namespace AdMedWeb.Repository.IRepository
 {
-    public interface IMedicationRepository : IRepository<Medication>
-    {
-    }
+    public interface IMedicationRepository : IRepository<Medication> { }
 }

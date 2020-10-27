@@ -3,10 +3,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AdMedWeb.Models
 {
-
     public class Medication
     {
-
         public int Id { get; set; }
         [DisplayName("Medication Name")]
         public string Name { get; set; }
@@ -18,7 +16,5 @@ namespace AdMedWeb.Models
         public string Notes { get; set; }
         [Required] public int ResidentId { get; set; }
         public Resident Resident { get; set; }
-
     }
-
 }

@@ -4,9 +4,7 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 <h1>News</h1>
-
 @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
 {
     <p style="margin-top: 20px;">

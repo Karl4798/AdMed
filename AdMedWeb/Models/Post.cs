@@ -6,7 +6,6 @@ namespace AdMedWeb.Models
 {
     public class Post
     {
-
         public int Id { get; set; }
         [DisplayName("Post Title")]
         [Required] public string PostName { get; set; }
@@ -20,6 +19,5 @@ namespace AdMedWeb.Models
         {
             TimeStamp = DateTime.Now;
         }
-
     }
 }

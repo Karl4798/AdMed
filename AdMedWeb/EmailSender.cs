@@ -5,11 +5,9 @@ using System.Threading.Tasks;
 
 namespace AdMedWeb
 {
-
     // Class used when sending emails (user signup verification, or contact form submission)
     public class EmailSender : IEmailSender
     {
-
         // Private configuration variables
         private string host;
         private int port;
@@ -40,5 +38,4 @@ namespace AdMedWeb
             );
         }
     }
-
 }

@@ -27,6 +27,5 @@ namespace AdMedWeb.Models
         [Required] public string CellTelephoneNumber { get; set; }
         [DisplayName("Email Address")]
         [Required] public string Email { get; set; }
-
     }
 }

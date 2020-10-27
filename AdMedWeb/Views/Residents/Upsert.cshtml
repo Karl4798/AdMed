@@ -1,7 +1,6 @@
 ﻿@model AdMedWeb.Models.Resident
 
 @{
-
     if (Model.Id != 0)
     {
         ViewData["Title"] = "Update Resident";
@@ -10,21 +9,15 @@
     {
         ViewData["Title"] = "New Resident";
     }
-
 }
-
 <form method="post" asp-action="Upsert">
-
     <div class="row px-2 mx-2 backgroundWhite border">
-
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
         @if (Model.Id != 0)
         {
             <input type="hidden" asp-for="Id" />
             <input type="hidden" asp-for="PrimaryContact.Id" />
         }
-
         <div id="leftContent">
             <div class="col-12 p-3">
                 <h2 class="text-primary">Resident</h2>
@@ -70,7 +63,6 @@
                         <label asp-for="DateOfBirth"></label>
                     </div>
                     <div class="col-8">
-
                         @{
                             var dateEst = "";
                             if (Model.Id != 0 || Model.DateOfBirth != null)
@@ -78,7 +70,6 @@
                                 dateEst = Model.DateOfBirth.ToShortDateString();
                             }
                         }
-
                         <input id="datepicker" value="@dateEst" type="text" asp-for="@Model.DateOfBirth" class="form-control" />
                     </div>
                 </div>
@@ -191,9 +182,7 @@
                     </div>
                 </div>
             </div>
-
         </div>
-
         <div id="rightContent">
             <div class="col-12 p-3">
                 <h2 class="text-primary">Primary Contact</h2>
@@ -303,15 +292,12 @@
                     <div class="col-8">
                         @if (!User.Identity.IsAuthenticated)
                         {
-
                             <button type="submit" class="btn-custom form-control" style="text-align: center;">
                                 @(Model.Id != 0 ? "Update" : "Submit")
                             </button>
-
                         }
                         else
                         {
-
                             <button type="submit" class="btn-custom form-control" style="text-align: center;">
                                 @(Model.Id != 0 ? "Update" : "Create")
                             </button>
@@ -326,11 +312,9 @@
                         }
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
-
 </form>
 
 @section scripts {

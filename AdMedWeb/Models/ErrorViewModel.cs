@@ -1,5 +1,3 @@
-using System;
-
 namespace AdMedWeb.Models
 {
     public class ErrorViewModel

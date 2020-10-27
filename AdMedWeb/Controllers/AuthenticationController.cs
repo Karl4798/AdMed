@@ -1,27 +1,21 @@
-﻿using System;
-using System.Security.Claims;
+﻿using System.Security.Claims;
 using System.Threading.Tasks;
 using AdMedWeb.Models;
 using AdMedWeb.Repository.IRepository;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 
 namespace AdMedWeb.Controllers
 {
     public class AuthenticationController : Controller
     {
-
         private readonly IAccountRepository _accRepo;
 
         public AuthenticationController(IAccountRepository accRepo)
         {
-
             _accRepo = accRepo;
-
         }
 
         [HttpGet]
@@ -41,13 +35,11 @@ namespace AdMedWeb.Controllers
                 TempData["Error"] = "Incorrect Username / Password Combination.";
                 return View();
             }
-
             var identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);
             identity.AddClaim(new Claim(ClaimTypes.Name, objUser.Username));
             identity.AddClaim(new Claim(ClaimTypes.Role, objUser.Role));
             var principal = new ClaimsPrincipal(identity);
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
-
             HttpContext.Session.SetString("JWToken", objUser.Token);
             TempData["alert"] = "Welcome " + objUser.Username;
             return RedirectToAction("Index", "Home");
@@ -73,7 +65,6 @@ namespace AdMedWeb.Controllers
             {
                 TempData["Error"] = null;
             }
-
             TempData["alert"] = "Registration Successful";
             return RedirectToAction("Login");
         }
@@ -84,6 +75,5 @@ namespace AdMedWeb.Controllers
             HttpContext.Session.SetString("JWToken", "");
             return RedirectToAction("Index", "Home");
         }
-
     }
 }

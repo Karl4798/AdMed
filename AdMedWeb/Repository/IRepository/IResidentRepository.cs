@@ -2,7 +2,5 @@
 
 namespace AdMedWeb.Repository.IRepository
 {
-    public interface IResidentRepository : IRepository<Resident>
-    {
-    }
+    public interface IResidentRepository : IRepository<Resident> { }
 }

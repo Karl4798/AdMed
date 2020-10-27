@@ -6,13 +6,6 @@ namespace AdMedWeb.Repository
 {
     public class ApplicationRepository : Repository<Application>, IApplicationRepository
     {
-
-        private readonly IHttpClientFactory _clientFactory;
-
-        public ApplicationRepository(IHttpClientFactory clientFactory) : base(clientFactory)
-        {
-            _clientFactory = clientFactory;
-        }
-
+        public ApplicationRepository(IHttpClientFactory clientFactory) : base(clientFactory) { }
     }
 }

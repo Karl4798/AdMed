@@ -11,7 +11,6 @@ namespace AdMedWeb.Controllers
 {
     public class AccountController : Controller
     {
-
         private readonly IAccountRepository _accRepo;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
@@ -26,7 +25,6 @@ namespace AdMedWeb.Controllers
         {
             var username = User.FindFirstValue(ClaimTypes.Name);
             User user = await _accRepo.GetAsync(SD.AccountAPIPath, username, HttpContext.Session.GetString("JWToken"));
-
             if (user != null)
             {
                 UpdateUserViewModel uuvm = new UpdateUserViewModel()
@@ -37,12 +35,9 @@ namespace AdMedWeb.Controllers
                     Username = user.Username,
                     Role = user.Role
                 };
-
                 return View(uuvm);
             }
-
             return View();
-            
         }
 
         [HttpPost]
@@ -50,10 +45,8 @@ namespace AdMedWeb.Controllers
         [Authorize(Roles = "Admin,Resident")]
         public async Task<ActionResult> Upsert(UpdateUserViewModel uuvm)
         {
-
             if (ModelState.IsValid)
             {
-
                 User user = new User()
                 {
                     Id = uuvm.Id,
@@ -62,33 +55,25 @@ namespace AdMedWeb.Controllers
                     Username = uuvm.Username,
                     Role = uuvm.Role
                 };
-
                 await _accRepo.UpdateAsync(SD.AccountAPIPath + user.Id, user, HttpContext.Session.GetString("JWToken"));
-
                 var username = User.FindFirstValue(ClaimTypes.Name);
                 if (!user.Username.Equals(username))
                 {
                     return RedirectToAction("Logout", "Authentication");
                 }
-
                 return View(uuvm);
-
             }
-
             return View(uuvm);
-
         }
 
         [HttpGet]
         [Authorize(Roles = "Admin,Resident")]
         public async Task<ActionResult> ResetPassword()
         {
-
             ResetPasswordViewModel obj = new ResetPasswordViewModel();
             var username = User.FindFirstValue(ClaimTypes.Name);
             obj.Username = username;
             return View(obj);
-
         }
 
         [HttpPost]
@@ -96,18 +81,12 @@ namespace AdMedWeb.Controllers
         [Authorize(Roles = "Admin,Resident")]
         public async Task<ActionResult> ResetPassword(ResetPasswordViewModel rpvm)
         {
-
             if (ModelState.IsValid)
             {
-
                 await _accRepo.ResetPasswordAsync(SD.AccountAPIPath + "resetpassword/", rpvm, HttpContext.Session.GetString("JWToken"));
-
                 return RedirectToAction(nameof(Upsert));
-
             }
-
             return View(rpvm);
-
         }
     }
 }

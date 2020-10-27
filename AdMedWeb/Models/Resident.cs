@@ -4,10 +4,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AdMedWeb.Models
 {
-
     public class Resident
     {
-
         // General information of the resident
         public int Id { get; set; }
         [DisplayName("First Name")]
@@ -43,9 +41,6 @@ namespace AdMedWeb.Models
         [DisplayName("Pharmacy Fax Number")]
         [Required] public string PharmacyFaxNumber { get; set; }
         public PrimaryContactResident PrimaryContact { get; set; }
-
         // General information of the primary contact included in PrimaryContact
-
     }
-
 }

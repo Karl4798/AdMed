@@ -43,7 +43,6 @@ namespace AdMedWeb
             services.AddScoped<IPostRepository, PostRepository>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
-
             services.AddHttpClient();
             services.AddSession(options =>
             {
@@ -62,9 +61,7 @@ namespace AdMedWeb
                     Configuration["EmailSender:UserName"],
                     Configuration["EmailSender:Password"]
                 )
-
             );
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -82,7 +79,6 @@ namespace AdMedWeb
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
             app.UseRouting();
             app.UseCors(x => x
                 .AllowAnyOrigin()
