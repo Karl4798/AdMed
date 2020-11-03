@@ -30,6 +30,12 @@ namespace AdMedWeb.Controllers
             return View();
         }
 
+        [HttpGet]
+        public ViewResult Contact()
+        {
+            return View();
+        }
+
         // Method used to post the Contact page
         [HttpPost]
         public async Task<IActionResult> About(ContactForm model)

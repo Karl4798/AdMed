@@ -4,81 +4,30 @@
     ViewData["Title"] = "About AdMed";
 }
 <h1>@ViewData["Title"]</h1>
-<style>
-    #map {
-        height: 650px;
-    }
-</style>
-<br />
-<br />
-<div id="map"></div>
 
-<script>
-    var map;
-    function initMap() {
-        map = new google.maps.Map(document.getElementById('map'), {
-            center: { lat: -29.844008, lng: 31.007181 },
-            zoom: 13
-        });
-        var markerBracU = new google.maps.Marker({
-            position: { lat: -29.844008, lng: 31.007181 },
-            map: map
-        });
-        var contentStringBracU = '<div id="content">' +
-            '<div id="siteNotice">' +
-            '</div>' +
-            '<h1 id="firstHeading" class="firstHeading">Garden View</h1>' +
-            '<div id="bodyContent">' +
-            '<p>12 Problem Mkhize (Cowey) Road, Essenwood, Durban, 4001.</p>';
-        var infowindowForBracU = new google.maps.InfoWindow({
-            content: contentStringBracU
-        });
-        markerBracU.addListener('mouseover', function () {
-            infowindowForBracU.open(map, markerBracU);
-        });
-        markerBracU.addListener('mouseout', function () {
-            infowindowForBracU.close();
-        });
-    }
-</script>
+<h4>Making your life easier...</h4>
 
-<div style="padding-top: 5%; padding-bottom: 5%" id="leftContent">
-    <h2>Contact Form</h2>
-    <div class="col-md-8">
-        <form asp-action="About">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Message" class="control-label"></label>
-                <textarea asp-for="Message" class="form-control" rows="6"></textarea>
-                <span asp-validation-for="Message" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Send Message" class="btn-custom" />
-            </div>
-        </form>
-    </div>
-</div>
+<p>
+    Morbi quis fermentum lorem, eget varius libero. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed blandit arcu dolor, in ultricies nisl lobortis nec.
+    In neque diam, maximus sed pulvinar finibus, cursus iaculis lectus. In eros turpis, mollis et laoreet ac, mattis ut arcu. Mauris id mollis velit. Pellentesque ex mauris, porta quis urna in, mattis eleifend arcu.
+    Etiam sagittis posuere tortor vel elementum. Fusce eget justo efficitur, semper est vitae, accumsan eros.
+    Mauris malesuada in eros non sollicitudin. Ut vulputate justo ipsum, nec lobortis odio sagittis et. Suspendisse commodo urna lacus, vitae pretium dui cursus sed.
+</p>
 
-<div style="padding-top: 5%;" id="rightContent">
-    <h2>Contact Details</h2>
-    <div style="padding-left: 2%;">
-        <h5 style="padding-top: 1%;">Physical Address</h5>
-        <h7>12 Problem Mkhize (Cowey) Road, <br> Essenwood, Durban, 4001.</h7>
-        <h5 style="padding-top: 3%;">Email Address</h5>
-        <a style="font-size: larger;" href="mailto:info@gardenview.org.za">info@gardenview.org.za</a>
-        <h5 style="padding-top: 3%;">Telephone Number</h5>
-        <a style="font-size: medium;" href="tel:031 201 5555">031 201 5555</a>
-    </div>
-</div>
+<h4>Providing a Central Hub for Information...</h4>
 
-<script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDuqUgvyE4XaLL4n3zVtAxujcKudCgtLqg&callback=initMap" type="text/javascript"></script>
+<p>
+    Morbi quis fermentum lorem, eget varius libero. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed blandit arcu dolor, in ultricies nisl lobortis nec.
+    In neque diam, maximus sed pulvinar finibus, cursus iaculis lectus. In eros turpis, mollis et laoreet ac, mattis ut arcu. Mauris id mollis velit. Pellentesque ex mauris, porta quis urna in, mattis eleifend arcu.
+    Etiam sagittis posuere tortor vel elementum. Fusce eget justo efficitur, semper est vitae, accumsan eros.
+    Mauris malesuada in eros non sollicitudin. Ut vulputate justo ipsum, nec lobortis odio sagittis et. Suspendisse commodo urna lacus, vitae pretium dui cursus sed.
+</p>
+
+<h4>Improving Efficency...</h4>
+
+<p>
+    Morbi quis fermentum lorem, eget varius libero. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed blandit arcu dolor, in ultricies nisl lobortis nec.
+    In neque diam, maximus sed pulvinar finibus, cursus iaculis lectus. In eros turpis, mollis et laoreet ac, mattis ut arcu. Mauris id mollis velit. Pellentesque ex mauris, porta quis urna in, mattis eleifend arcu.
+    Etiam sagittis posuere tortor vel elementum. Fusce eget justo efficitur, semper est vitae, accumsan eros.
+    Mauris malesuada in eros non sollicitudin. Ut vulputate justo ipsum, nec lobortis odio sagittis et. Suspendisse commodo urna lacus, vitae pretium dui cursus sed.
+</p>
