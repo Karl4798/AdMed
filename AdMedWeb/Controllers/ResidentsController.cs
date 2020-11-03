@@ -13,14 +13,16 @@ namespace AdMedWeb.Controllers
     public class ResidentsController : Controller
     {
         private readonly IResidentRepository _reRepo;
+        private readonly IAccountRepository _accRepo;
         private readonly IEmailSender _emailSender;
         // GUID used for contact page
         private static Guid guid;
         private static int _applicationId;
 
-        public ResidentsController(IResidentRepository reRepo, IEmailSender emailSender)
+        public ResidentsController(IResidentRepository reRepo, IAccountRepository accRepo, IEmailSender emailSender)
         {
             _reRepo = reRepo;
+            _accRepo = accRepo;
             _emailSender = emailSender;
         }
 
@@ -115,12 +117,26 @@ namespace AdMedWeb.Controllers
                         await _emailSender.SendEmailAsync("admin@testsetup.net", "Reference Number: "
                                                                                 + guid, "<h2>Email: " + obj.PrimaryContact.Email + "</h2>"
                                                                                         + "<br>" + "<h2>Your Application Was Successful!</h2>" +
-                                                                                        "<p>" + obj.PrimaryContact.FirstName + " " + obj.PrimaryContact.LastName + " will be contacted shortly.</p>");
+                                                                                        "<p>" + obj.PrimaryContact.FirstName + " " + obj.PrimaryContact.LastName + " will be contacted shortly.</p>" +
+                                                                                        "<p>Username: " + obj.PrimaryContact.Email + "<br>" + "Password:" + guid + " is you new account!</p>" +
+                                                                                        "<p>You can access your account on https://admedweb.azurewebsites.net/ </p>");
                         await _emailSender.SendEmailAsync(obj.PrimaryContact.Email, "Reference Number: "
                                                                                     + guid, "<h2>Email: " + obj.PrimaryContact.Email + "</h2>"
                                                                                             + "<br>" + "<h2>Your Application Was Successful!</h2>" +
                                                                                             "<p>" + obj.PrimaryContact.FirstName + " " + obj.PrimaryContact.LastName + " will be contacted shortly.</p>");
                         await _reRepo.DeleteAsync(SD.ApplicationAPIPath, _applicationId, HttpContext.Session.GetString("JWToken"));
+
+                        User user = new User()
+                        {
+                            FirstName = obj.PrimaryContact.FirstName,
+                            LastName = obj.PrimaryContact.LastName,
+                            Username = obj.PrimaryContact.Email,
+                            Password = guid.ToString(),
+                            ConfirmPassword = guid.ToString()
+                        };
+
+                        await _accRepo.RegisterAsync(SD.AccountAPIPath + "register/", user);
+
                     }
                 }
                 else
