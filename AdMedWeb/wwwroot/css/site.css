@@ -188,3 +188,9 @@ video {
 .customlogout:hover {
     color: red !important;
 }
+
+.btn-success {
+    color: #fff;
+    background-color: #40c665;
+    border-color: #40c665;
+}
