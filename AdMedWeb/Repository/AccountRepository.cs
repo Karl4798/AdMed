@@ -39,7 +39,7 @@ namespace AdMedWeb.Repository
             return new User();
         }
 
-        public async Task<bool> RegisterAsync(string url, User objToCreate)
+        public async Task<bool?> RegisterAsync(string url, User objToCreate)
         {
             var request = new HttpRequestMessage(HttpMethod.Post, url);
             if (objToCreate != null)
@@ -56,6 +56,10 @@ namespace AdMedWeb.Repository
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
                 return true;
+            }
+            if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+            {
+                return null;
             }
             return false;
         }

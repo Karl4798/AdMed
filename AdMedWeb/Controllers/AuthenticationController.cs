@@ -55,15 +55,16 @@ namespace AdMedWeb.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(User obj)
         {
-            bool result = await _accRepo.RegisterAsync(SD.AccountAPIPath + "register/", obj);
+            var result = await _accRepo.RegisterAsync(SD.AccountAPIPath + "register/", obj);
             if (result == false)
             {
                 TempData["Error"] = "Account already in use!";
                 return View(obj);
             }
-            else
+            if (result == null)
             {
                 TempData["Error"] = null;
+                return View(obj);
             }
             TempData["alert"] = "Registration Successful";
             return RedirectToAction("Login");

@@ -123,7 +123,9 @@ namespace AdMedWeb.Controllers
                         await _emailSender.SendEmailAsync(obj.PrimaryContact.Email, "Reference Number: "
                                                                                     + guid, "<h2>Email: " + obj.PrimaryContact.Email + "</h2>"
                                                                                             + "<br>" + "<h2>Your Application Was Successful!</h2>" +
-                                                                                            "<p>" + obj.PrimaryContact.FirstName + " " + obj.PrimaryContact.LastName + " will be contacted shortly.</p>");
+                                                                                            "<p>" + obj.PrimaryContact.FirstName + " " + obj.PrimaryContact.LastName + " will be contacted shortly.</p>" +
+                                                                                            "<p>Username: " + obj.PrimaryContact.Email + "<br>" + "Password:" + guid + " is you new account!</p>" +
+                                                                                            "<p>You can access your account on https://admedweb.azurewebsites.net/ </p>");
                         await _reRepo.DeleteAsync(SD.ApplicationAPIPath, _applicationId, HttpContext.Session.GetString("JWToken"));
 
                         User user = new User()
@@ -132,6 +134,7 @@ namespace AdMedWeb.Controllers
                             LastName = obj.PrimaryContact.LastName,
                             Username = obj.PrimaryContact.Email,
                             Password = guid.ToString(),
+                            Role = "Resident",
                             ConfirmPassword = guid.ToString()
                         };
 

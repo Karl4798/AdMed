@@ -115,6 +115,7 @@ select {
 }
 
 .videoBgWrapper {
+    margin-top: 95px;
     position: fixed;
     top: 0;
     right: 0;
@@ -123,7 +124,6 @@ select {
     overflow: hidden;
     z-index: -100;
     margin-bottom: 55px;
-
 }
 
 .videoBg {
