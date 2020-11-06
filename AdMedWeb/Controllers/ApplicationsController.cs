@@ -105,19 +105,16 @@ namespace AdMedWeb.Controllers
                         TempData.Put("application", obj);
                         return RedirectToAction("Upsert", "Residents");
                     }
-                    else if (obj.Approval == Enums.Approvals.Decline)
+                    if (obj.Approval == Enums.Approvals.Decline)
                     {
                         await _apRepo.DeleteAsync(SD.ApplicationAPIPath, obj.Id, HttpContext.Session.GetString("JWToken"));
                         return RedirectToAction(nameof(Index));
                     }
                     await PostUpdateApplication(obj);
+                    return RedirectToAction(nameof(Index));
                 }
             }
-            else
-            {
-                return View(obj);
-            }
-            return null;
+            return View(obj);
         }
 
         [Authorize(Roles = "Admin")]
