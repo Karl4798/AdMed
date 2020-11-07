@@ -28,10 +28,10 @@
                             <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="About">About Us</a>
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="About">About</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Contact">Contact Us</a>
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Contact">Contact</a>
                         </li>
                         @if (!User.Identity.IsAuthenticated)
                         {
@@ -51,7 +51,7 @@
                                 <a class="nav-link" asp-controller="Residents" asp-action="Index">Residents</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" asp-controller="Medications" asp-action="Index">Medications</a>
+                                <a class="nav-link" asp-controller="Medications" asp-action="Index">Meds</a>
                             </li>
                         }
                         @if (User.Identity.IsAuthenticated && User.IsInRole("Resident"))
