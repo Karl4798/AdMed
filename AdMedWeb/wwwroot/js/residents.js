@@ -23,10 +23,10 @@ function loadDataTable() {
                 "render": function (data) {
                     return `<div class="text-center">
                                 <a href="/residents/Upsert/${data}" class='btn btn-success text-white'
-                                    style='cursor:pointer;'> <i class='far fa-edit'></i></a>
+                                    style='cursor:pointer; max-width: 25%;'> <i class='far fa-edit'></i></a>
                                     &nbsp;
                                 <a href="/Medications/Index?residentId=${data}" class='btn btn-info text-white'
-                                    style='cursor:pointer;'> <i class='fas fa-tablets'></i></a>
+                                    style='cursor:pointer; max-width: 25%;'> <i class='fas fa-tablets'></i></a>
                                     &nbsp;
                                 <a onclick=Delete("/residents/Delete/${data}") class='btn btn-danger text-white'
                                     style='cursor:pointer;'> <i class='far fa-trash-alt'></i></a>

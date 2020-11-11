@@ -292,13 +292,13 @@
                     <div class="col-8">
                         @if (!User.Identity.IsAuthenticated)
                         {
-                            <button type="submit" class="btn-custom form-control" style="text-align: center;">
+                            <button type="submit" class="btn btn-primary text-white form-control" style="text-align: center;">
                                 @(Model.Id != 0 ? "Update" : "Submit")
                             </button>
                         }
                         else
                         {
-                            <button type="submit" class="btn-custom form-control" style="text-align: center;">
+                            <button type="submit" class="btn btn-primary text-white form-control" style="text-align: center;">
                                 @(Model.Id != 0 ? "Update" : "Create")
                             </button>
                         }

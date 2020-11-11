@@ -135,6 +135,7 @@ namespace AdMedWeb.Controllers
 
         public async Task<IActionResult> GetAllApplications()
         {
+
             return Json(new {data = await _apRepo.GetAllAsync(SD.ApplicationAPIPath, HttpContext.Session.GetString("JWToken")) });
         }
 

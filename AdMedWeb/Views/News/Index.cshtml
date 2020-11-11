@@ -10,7 +10,7 @@
     @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
     {
         <p style="margin-top: 20px;">
-            <a asp-action="Upsert" class="btn btn-primary" style="width: 300px;">Create New</a>
+            <a asp-action="Upsert" class="btn btn-primary text-white" style="width: 300px;">Create New</a>
         </p>
     }
     <div class="row">

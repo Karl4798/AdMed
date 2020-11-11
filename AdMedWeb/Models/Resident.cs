@@ -40,6 +40,8 @@ namespace AdMedWeb.Models
         [Required] public string PharmacyTelephoneNumber { get; set; }
         [DisplayName("Pharmacy Fax Number")]
         [Required] public string PharmacyFaxNumber { get; set; }
+        [DisplayName("Room Number")]
+        [Required] public string RoomNumber { get; set; }
         public PrimaryContactResident PrimaryContact { get; set; }
         // General information of the primary contact included in PrimaryContact
     }

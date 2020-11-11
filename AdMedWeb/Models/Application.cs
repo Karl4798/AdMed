@@ -8,6 +8,11 @@ namespace AdMedWeb.Models
     public class Application
     {
 
+        public Application()
+        {
+            TimeStamp = DateTime.Now;
+        }
+
         public int Id { get; set; }
         [DisplayName("First Name")]
         [Required] public string FirstName { get; set; }
@@ -41,10 +46,9 @@ namespace AdMedWeb.Models
         [Required] public string PharmacyTelephoneNumber { get; set; }
         [DisplayName("Pharmacy Fax Number")]
         [Required] public string PharmacyFaxNumber { get; set; }
+        public DateTime TimeStamp { get; set; }
         public PrimaryContactApplication PrimaryContact { get; set; }
-
         public Enums.Approvals Approval { get; set; }
-
         // General information of the primary contact included in PrimaryContact
 
     }
