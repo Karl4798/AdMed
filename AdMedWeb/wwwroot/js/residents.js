@@ -12,6 +12,7 @@ function loadDataTable() {
             "datatype": "json"
         },
         "columns": [
+            { "data": "roomNumber", "width": "10%" },
             { "data": "firstName", "width": "10%" },
             { "data": "lastName", "width": "10%" },
             { "data": "genderString", "width": "10%" },
