@@ -21,6 +21,7 @@ namespace AdMedWeb.Models
         [Required] public Enums.Genders Gender { get; set; }
         public string GenderString { get; set; }
         [Required] public string Allergies { get; set; }
+        public string DateOfBirthString { get; set; }
         [DisplayName("Date of Birth")]
         [Required(ErrorMessage = "Date of Birth field is required.")] public DateTime DateOfBirth { get; set; }
         [DisplayName("Identity Number")]
@@ -46,6 +47,7 @@ namespace AdMedWeb.Models
         [Required] public string PharmacyTelephoneNumber { get; set; }
         [DisplayName("Pharmacy Fax Number")]
         [Required] public string PharmacyFaxNumber { get; set; }
+        public string TimeStampString { get; set; }
         public DateTime TimeStamp { get; set; }
         public PrimaryContactApplication PrimaryContact { get; set; }
         public Enums.Approvals Approval { get; set; }

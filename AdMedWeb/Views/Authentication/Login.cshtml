@@ -3,19 +3,22 @@
 @{
     ViewData["Title"] = "Login";
 }
-<h1>Login</h1>
-<form method="post" id="leftContent">
-    <p style="color: red"><strong>@TempData["Error"]</strong></p>
-    <div class="form-group">
-        <label for="exampleInputEmail1">Email address</label>
-        <input asp-for="Username" type="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter email">
-        <small class="form-text text-muted">We'll never share your email with anyone else.</small>
-        <span asp-validation-for="Username" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label for="exampleInputPassword1">Password</label>
-        <input asp-for="Password" type="password" class="form-control" placeholder="Password">
-        <span asp-validation-for="Password" class="text-danger"></span>
-    </div>
-    <button type="submit" class="btn btn-primary" value="Submit">Login</button>
-</form>
+
+<div style="margin-left: 10%; margin-right: 10%;">
+    <h1>Login</h1>
+    <form method="post" id="leftContent">
+        <p style="color: red"><strong>@TempData["Error"]</strong></p>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            <input asp-for="Username" type="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter email">
+            <small class="form-text text-muted">We'll never share your email with anyone else.</small>
+            <span asp-validation-for="Username" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input asp-for="Password" type="password" class="form-control" placeholder="Password">
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary" value="Submit">Login</button>
+    </form>
+</div>

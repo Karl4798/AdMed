@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using AdMedWeb.Models;
 using AdMedWeb.Repository.IRepository;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using System.Security.Claims;
 
 namespace AdMedWeb.Controllers
 {
@@ -100,6 +101,28 @@ namespace AdMedWeb.Controllers
             return obj;
         }
 
+        [HttpGet]
+        [Authorize(Roles = "Admin,Resident")]
+        public async Task<ActionResult> Details()
+        {
+            var username = User.FindFirstValue(ClaimTypes.Name);
+            var residents = await _reRepo.GetAllAsync(SD.ResidentAPIPath, HttpContext.Session.GetString("JWToken"));
+
+            foreach (var item in residents)
+            {
+                if (item.PrimaryContact.Email.Equals(username))
+                {
+
+                    var data = await _reRepo.GetAsync(SD.ResidentAPIPath, item.Id, HttpContext.Session.GetString("JWToken"));
+                    data.DateOfBirthString = data.DateOfBirth.ToString().Split(" ")[0];
+                    return View(data);
+                }
+            }
+
+            return View();
+
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AllowAnonymous]
@@ -164,7 +187,19 @@ namespace AdMedWeb.Controllers
 
         public async Task<IActionResult> GetAllResidents()
         {
-            return Json(new {data = await _reRepo.GetAllAsync(SD.ResidentAPIPath, HttpContext.Session.GetString("JWToken")) });
+
+            var data = await _reRepo.GetAllAsync(SD.ResidentAPIPath, HttpContext.Session.GetString("JWToken"));
+
+            if (data != null)
+            {
+                foreach (var item in data)
+                {
+                    item.DateOfBirthString = item.DateOfBirth.ToString().Split(" ")[0];
+                }
+            }
+
+            return Json(new { data });
+
         }
 
         [HttpDelete]

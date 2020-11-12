@@ -43,6 +43,7 @@ namespace AdMedWeb.Controllers
             // If the model state is valid (all fields have passed validation), then send a message to admin@testsetup.net
             if (ModelState.IsValid)
             {
+
                 // Gets a new GUID for the contact form
                 guid = Guid.NewGuid();
                 // Sends the email with all required information

@@ -136,7 +136,18 @@ namespace AdMedWeb.Controllers
         public async Task<IActionResult> GetAllApplications()
         {
 
-            return Json(new {data = await _apRepo.GetAllAsync(SD.ApplicationAPIPath, HttpContext.Session.GetString("JWToken")) });
+            var data = await _apRepo.GetAllAsync(SD.ApplicationAPIPath, HttpContext.Session.GetString("JWToken"));
+
+            if (data != null)
+            {
+                foreach (var item in data)
+                {
+                    item.TimeStampString = item.TimeStamp.ToString().Split(" ")[0];
+                    item.DateOfBirthString = item.DateOfBirth.ToString().Split(" ")[0];
+                }
+            }
+
+            return Json(new { data });
         }
 
         [HttpDelete]

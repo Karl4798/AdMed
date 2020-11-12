@@ -15,9 +15,7 @@ function loadDataTable() {
             { "data": "roomNumber", "width": "10%" },
             { "data": "firstName", "width": "10%" },
             { "data": "lastName", "width": "10%" },
-            { "data": "genderString", "width": "10%" },
-            { "data": "dateOfBirth", "width": "10%" },
-            { "data": "identityNumber", "width": "10%" },
+            { "data": "dateOfBirthString", "width": "10%" },
             { "data": "cellTelephoneNumber", "width": "10%" },
             {
                 "data": "id",

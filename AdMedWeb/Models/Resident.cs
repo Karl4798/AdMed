@@ -15,6 +15,7 @@ namespace AdMedWeb.Models
         [Required] public Enums.Genders Gender { get; set; }
         public string GenderString { get; set; }
         [Required] public string Allergies { get; set; }
+        public string DateOfBirthString { get; set; }
         [DisplayName("Date of Birth")]
         [Required] public DateTime DateOfBirth { get; set; }
         [DisplayName("Identity Number")]
