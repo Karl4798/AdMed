@@ -17,14 +17,12 @@ namespace AdMedWeb.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Admin,Resident")]
         public async Task<ActionResult> Index()
         {
             return View(await _psRepo.GetAllAsync(SD.PostAPIPath, HttpContext.Session.GetString("JWToken")));
         }
 
         [HttpGet]
-        [Authorize(Roles = "Admin,Resident")]
         public async Task<ActionResult> Details(int id)
         {
             return View(await _psRepo.GetAsync(SD.PostAPIPath, id, HttpContext.Session.GetString("JWToken")));
