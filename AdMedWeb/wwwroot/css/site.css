@@ -193,3 +193,39 @@ video {
     background-color: #40c665;
     border-color: #40c665;
 }
+
+.index-content {
+    z-index: 2;
+    margin-top: 30%;
+    margin-bottom: 30%;
+    text-align: center;
+}
+
+    .index-content h1 {
+        font-size: 50px !important;
+        font-weight: 700 !important;
+        color: #40c665;
+    }
+
+    .index-content p {
+        font-size: 25px !important;
+        color: white !important;
+        font-style: oblique;
+        font-family: monospace;
+    }
+
+    .index-content a {
+        font-size: 25px !important;
+        background-color: transparent;
+        border-color: #40c665;
+        font-weight: bold;
+        font-style: italic;
+    }
+
+        .index-content a:hover {
+            font-size: 25px !important;
+            background-color: #40c665;
+            border-color: #40c665;
+            font-weight: bold;
+            font-style: italic;
+        }
