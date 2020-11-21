@@ -9,5 +9,6 @@ namespace AdMedWeb.Repository.IRepository
         Task<User> LoginAsync(string url, User objToLogin);
         Task<bool?> RegisterAsync(string url, User objToCreate);
         Task<bool> ResetPasswordAsync(string url, ResetPasswordViewModel objToCreate, string token);
+        Task<bool> AdminResetPasswordAsync(string url, AdminResetPasswordViewModel objToCreate, string token);
     }
 }

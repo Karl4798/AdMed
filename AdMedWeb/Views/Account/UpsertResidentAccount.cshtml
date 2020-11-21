@@ -1,4 +1,4 @@
-﻿@model AdMedWeb.Models.ViewModels.UpdateUserViewModel
+﻿@model AdMedWeb.Models.ViewModels.AccountViewModel
 @{
     ViewData["Title"] = "Resident Account Details";
 }
@@ -6,33 +6,38 @@
 <div style="margin-left: 10%; margin-right: 10%;">
     <h1>Account Details</h1>
     <form method="post" id="leftContent">
-        <input type="hidden" asp-for="Id" />
-        <input type="hidden" asp-for="Role" />
+        <input type="hidden" asp-for="User.Id" />
+        <input type="hidden" asp-for="User.Role" />
         <div class="form-group">
             <label for="exampleInputLastName1">ID</label>
-            <label type="text" class="form-control">@Model.Id</label>
+            <label type="text" class="form-control">@Model.User.Id</label>
         </div>
         <div class="form-group">
             <label>Role</label>
-            <select asp-for="RolesEnum" asp-items="Html.GetEnumSelectList<Enums.Roles>()" class="form-control"></select>
-            <span asp-validation-for="RolesEnum" class="text-danger"></span>
+            <select asp-for="User.RolesEnum" asp-items="Html.GetEnumSelectList<Enums.Roles>()" class="form-control"></select>
+            <span asp-validation-for="User.RolesEnum" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label for="exampleInputEmail1">Email address</label>
-            <input asp-for="Username" type="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter email">
-            <span asp-validation-for="Username" class="text-danger"></span>
+            <label>Email address</label>
+            <input asp-for="User.Username" type="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter email">
+            <span asp-validation-for="User.Username" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label for="exampleInputFirstName1">First Name</label>
-            <input asp-for="FirstName" type="text" class="form-control" placeholder="First Name">
-            <span asp-validation-for="FirstName" class="text-danger"></span>
+            <label>First Name</label>
+            <input asp-for="User.FirstName" type="text" class="form-control" placeholder="First Name">
+            <span asp-validation-for="User.FirstName" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label for="exampleInputLastName1">Last Name</label>
-            <input asp-for="LastName" type="text" class="form-control" placeholder="Last Name">
-            <span asp-validation-for="LastName" class="text-danger"></span>
+            <label>Last Name</label>
+            <input asp-for="User.LastName" type="text" class="form-control" placeholder="Last Name">
+            <span asp-validation-for="User.LastName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label>Linked Resident</label>
+            @Html.DropDownListFor(m => m.User.ResidentId, Model.ResidentList, "-Please select a resident-", new { @class = "form-control" })
+            <span asp-validation-for="User.ResidentId" class="text-danger"></span>
         </div>
         <button type="submit" class="btn btn-primary" style="width: 45%; float: left;" value="Submit">Update</button>
-        <a href="/Account/ResetPassword" class="btn btn-danger" style="text-align: center; width: 45%; float: right;">Reset Password</a>
+        <a href="/Account/AdminResetPassword/@Model.User.Id" class="btn btn-danger" style="text-align: center; width: 45%; float: right;">Reset Password</a>
     </form>
 </div>

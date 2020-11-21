@@ -13,5 +13,7 @@ namespace AdMedWeb.Models
         public Enums.Roles RolesEnum { get; set; }
         public string Role { get; set; }
         public string Token { get; set; }
+        public int ResidentId { get; set; }
+        public Resident Resident { get; set; }
     }
 }

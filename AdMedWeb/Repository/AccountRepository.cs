@@ -88,5 +88,31 @@ namespace AdMedWeb.Repository
             }
             return false;
         }
+
+        public async Task<bool> AdminResetPasswordAsync(string url, AdminResetPasswordViewModel objToResetPassword, string token)
+        {
+            var request = new HttpRequestMessage(HttpMethod.Post, url);
+            if (objToResetPassword != null)
+            {
+                request.Content = new StringContent(
+                    JsonConvert.SerializeObject(objToResetPassword), Encoding.UTF8, "application/json");
+            }
+            else
+            {
+                return false;
+            }
+            var client = _clientFactory.CreateClient();
+            if (token != null && token.Length != 0)
+            {
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            }
+            HttpResponseMessage response = await client.SendAsync(request);
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                return true;
+            }
+            return false;
+        }
+
     }
 }
