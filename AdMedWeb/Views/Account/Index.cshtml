@@ -1,0 +1,27 @@
+﻿@{
+    ViewData["Title"] = "Accounts";
+}
+<div class="backgroundWhite" style="border-radius:20px;">
+    <div class="row">
+        <div class="col-6">
+            <h2 class="text-info">Accounts</h2>
+        </div>
+    </div>
+    <br />
+    <br />
+    <table id="tblData" class="table table-striped table-bordered" style="width:100%">
+        <thead>
+            <tr class="table-danger">
+                <th>Username</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Role</th>
+                <th></th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+@section scripts {
+    <script src="~/js/users.js"></script>
+}

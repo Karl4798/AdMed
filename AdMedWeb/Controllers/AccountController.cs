@@ -4,8 +4,12 @@ using AdMedWeb.Repository.IRepository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using static AdMedWeb.Models.Enums;
 
 namespace AdMedWeb.Controllers
 {
@@ -20,11 +24,23 @@ namespace AdMedWeb.Controllers
             _httpContextAccessor = httpContextAccessor;
         }
 
+        [Authorize(Roles = "Admin")]
+        public IActionResult Index()
+        {
+            return View(new User() { });
+        }
+
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> GetAllAccounts()
+        {
+            return Json(new { data = await _accRepo.GetAllAsync(SD.AccountAPIPath, HttpContext.Session.GetString("JWToken"))});
+        }
+
         [Authorize(Roles = "Admin,Resident")]
         public async Task<ActionResult> Upsert()
         {
-            var username = User.FindFirstValue(ClaimTypes.Name);
-            User user = await _accRepo.GetAsync(SD.AccountAPIPath, username, HttpContext.Session.GetString("JWToken"));
+            var id = User.FindFirstValue(ClaimTypes.Sid);
+            User user = await _accRepo.GetAsync(SD.AccountAPIPath, id, HttpContext.Session.GetString("JWToken"));
             if (user != null)
             {
                 UpdateUserViewModel uuvm = new UpdateUserViewModel()
@@ -38,6 +54,53 @@ namespace AdMedWeb.Controllers
                 return View(uuvm);
             }
             return View();
+        }
+
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> UpsertResidentAccount(int? id)
+        {
+
+            User user = await _accRepo.GetAsync(SD.AccountAPIPath, id.GetValueOrDefault(), HttpContext.Session.GetString("JWToken"));
+
+            if (user != null)
+            {
+                UpdateUserViewModel uuvm = new UpdateUserViewModel()
+                {
+                    Id = user.Id,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    Username = user.Username,
+                    RolesEnum = (Roles)Enum.Parse(typeof(Roles), user.Role)
+                };
+                return View(uuvm);
+            }
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult> UpsertResidentAccount(UpdateUserViewModel uuvm)
+        {
+
+            
+            uuvm.Role = uuvm.RolesEnum.ToString();
+            Debug.WriteLine(uuvm);
+
+            if (ModelState.IsValid)
+            {
+                User user = new User()
+                {
+                    Id = uuvm.Id,
+                    FirstName = uuvm.FirstName,
+                    LastName = uuvm.LastName,
+                    Username = uuvm.Username,
+                    Role = uuvm.RolesEnum.ToString()
+                };
+                await _accRepo.UpdateAsync(SD.AccountAPIPath + user.Id, user, HttpContext.Session.GetString("JWToken"));
+                return RedirectToAction(nameof(Index));
+            }
+            return View(uuvm);
         }
 
         [HttpPost]

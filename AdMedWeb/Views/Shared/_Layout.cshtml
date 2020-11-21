@@ -53,6 +53,9 @@
                             <li class="nav-item">
                                 <a class="nav-link" asp-controller="Medications" asp-action="Index">Meds</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Account" asp-action="Index">Accounts</a>
+                            </li>
                         }
                         @if (User.Identity.IsAuthenticated && User.IsInRole("Resident"))
                         {

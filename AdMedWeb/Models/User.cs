@@ -10,6 +10,7 @@ namespace AdMedWeb.Models
         [Required] [Compare("Password")] public string ConfirmPassword { get; set; }
         [Required] public string FirstName { get; set; }
         [Required] public string LastName { get; set; }
+        public Enums.Roles RolesEnum { get; set; }
         public string Role { get; set; }
         public string Token { get; set; }
     }

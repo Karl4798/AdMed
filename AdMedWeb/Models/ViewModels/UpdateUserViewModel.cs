@@ -8,6 +8,7 @@ namespace AdMedWeb.Models.ViewModels
         [Required] public string Username { get; set; }
         [Required] public string FirstName { get; set; }
         [Required] public string LastName { get; set; }
-        [Required] public string Role { get; set; }
+        public Enums.Roles RolesEnum { get; set; }
+        public string Role { get; set; }
     }
 }

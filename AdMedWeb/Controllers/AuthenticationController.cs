@@ -38,6 +38,7 @@ namespace AdMedWeb.Controllers
             var identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);
             identity.AddClaim(new Claim(ClaimTypes.Name, objUser.Username));
             identity.AddClaim(new Claim(ClaimTypes.Role, objUser.Role));
+            identity.AddClaim(new Claim(ClaimTypes.Sid, objUser.Id.ToString()));
             var principal = new ClaimsPrincipal(identity);
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
             HttpContext.Session.SetString("JWToken", objUser.Token);
