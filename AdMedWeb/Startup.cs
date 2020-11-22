@@ -31,7 +31,7 @@ namespace AdMedWeb
                 {
                     options.Cookie.HttpOnly = true;
                     options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
-                    options.LoginPath = "/Home/Login";
+                    options.LoginPath = "/Authentication/Login";
                     options.AccessDeniedPath = "/Home/AccessDenied";
                     options.SlidingExpiration = true;
                 });
@@ -44,6 +44,7 @@ namespace AdMedWeb
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddHttpClient();
+
             services.AddSession(options =>
             {
                 // Set a short timeout for easy testing.

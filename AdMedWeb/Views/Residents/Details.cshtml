@@ -1,137 +1,124 @@
 ﻿@model AdMedWeb.Models.Resident
 
 @{
-    ViewData["Title"] = "View";
+    ViewData["Title"] = "Resident Information";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Resident Information</h1>
-
 @if (Model != null)
 {
-    <div>
+    <div style="font-size: 20px; margin-left: 10%; margin-right: 10%; margin-top: 1%;">
+        <h1>Resident Information</h1>
         <h4>Resident</h4>
         <hr />
         <dl class="row">
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Id)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Id)
-            </dd>
-            <dt class="col-sm-2">
+            <dt class="col-sm-4">
                 @Html.DisplayNameFor(model => model.FirstName)
             </dt>
-            <dd class="col-sm-10">
+            <dd class="col-sm-6">
                 @Html.DisplayFor(model => model.FirstName)
             </dd>
-            <dt class="col-sm-2">
+            <dt class="col-sm-4">
                 @Html.DisplayNameFor(model => model.LastName)
             </dt>
-            <dd class="col-sm-10">
+            <dd class="col-sm-6">
                 @Html.DisplayFor(model => model.LastName)
             </dd>
-            <dt class="col-sm-2">
+            <dt class="col-sm-4">
                 @Html.DisplayNameFor(model => model.Gender)
             </dt>
-            <dd class="col-sm-10">
+            <dd class="col-sm-6">
                 @Html.DisplayFor(model => model.Gender)
             </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.GenderString)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.GenderString)
-            </dd>
-            <dt class="col-sm-2">
+            <dt class="col-sm-4">
                 @Html.DisplayNameFor(model => model.Allergies)
             </dt>
-            <dd class="col-sm-10">
+            <dd class="col-sm-6">
                 @Html.DisplayFor(model => model.Allergies)
             </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.DateOfBirthString)
+            <dt class="col-sm-4">
+                Date of Birth
             </dt>
-            <dd class="col-sm-10">
+            <dd class="col-sm-6">
                 @Html.DisplayFor(model => model.DateOfBirthString)
             </dd>
-            <dt class="col-sm-2">
+            <dt class="col-sm-4">
                 @Html.DisplayNameFor(model => model.IdentityNumber)
             </dt>
-            <dd class="col-sm-10">
+            <dd class="col-sm-6">
                 @Html.DisplayFor(model => model.IdentityNumber)
             </dd>
-            <dt class="col-sm-2">
+            <dt class="col-sm-4">
                 @Html.DisplayNameFor(model => model.MedicalAid)
             </dt>
-            <dd class="col-sm-10">
+            <dd class="col-sm-6">
                 @Html.DisplayFor(model => model.MedicalAid)
             </dd>
-            <dt class="col-sm-2">
+            <dt class="col-sm-4">
                 @Html.DisplayNameFor(model => model.MedicalAidNumber)
             </dt>
-            <dd class="col-sm-10">
+            <dd class="col-sm-6">
                 @Html.DisplayFor(model => model.MedicalAidNumber)
             </dd>
-            <dt class="col-sm-2">
+            <dt class="col-sm-4">
                 @Html.DisplayNameFor(model => model.DoctorName)
             </dt>
-            <dd class="col-sm-10">
+            <dd class="col-sm-6">
                 @Html.DisplayFor(model => model.DoctorName)
             </dd>
-            <dt class="col-sm-2">
+            <dt class="col-sm-4">
                 @Html.DisplayNameFor(model => model.HomeTelephoneNumber)
             </dt>
-            <dd class="col-sm-10">
+            <dd class="col-sm-6">
                 @Html.DisplayFor(model => model.HomeTelephoneNumber)
             </dd>
-            <dt class="col-sm-2">
+            <dt class="col-sm-4">
                 @Html.DisplayNameFor(model => model.WorkTelephoneNumber)
             </dt>
-            <dd class="col-sm-10">
+            <dd class="col-sm-6">
                 @Html.DisplayFor(model => model.WorkTelephoneNumber)
             </dd>
-            <dt class="col-sm-2">
+            <dt class="col-sm-4">
                 @Html.DisplayNameFor(model => model.CellTelephoneNumber)
             </dt>
-            <dd class="col-sm-10">
+            <dd class="col-sm-6">
                 @Html.DisplayFor(model => model.CellTelephoneNumber)
             </dd>
-            <dt class="col-sm-2">
+            <dt class="col-sm-4">
                 @Html.DisplayNameFor(model => model.Undertaker)
             </dt>
-            <dd class="col-sm-10">
+            <dd class="col-sm-6">
                 @Html.DisplayFor(model => model.Undertaker)
             </dd>
-            <dt class="col-sm-2">
+            <dt class="col-sm-4">
                 @Html.DisplayNameFor(model => model.UndertakerTelephoneNumber)
             </dt>
-            <dd class="col-sm-10">
+            <dd class="col-sm-6">
                 @Html.DisplayFor(model => model.UndertakerTelephoneNumber)
             </dd>
-            <dt class="col-sm-2">
+            <dt class="col-sm-4">
                 @Html.DisplayNameFor(model => model.PharmacyName)
             </dt>
-            <dd class="col-sm-10">
+            <dd class="col-sm-6">
                 @Html.DisplayFor(model => model.PharmacyName)
             </dd>
-            <dt class="col-sm-2">
+            <dt class="col-sm-4">
                 @Html.DisplayNameFor(model => model.PharmacyTelephoneNumber)
             </dt>
-            <dd class="col-sm-10">
+            <dd class="col-sm-6">
                 @Html.DisplayFor(model => model.PharmacyTelephoneNumber)
             </dd>
-            <dt class="col-sm-2">
+            <dt class="col-sm-4">
                 @Html.DisplayNameFor(model => model.PharmacyFaxNumber)
             </dt>
-            <dd class="col-sm-10">
+            <dd class="col-sm-6">
                 @Html.DisplayFor(model => model.PharmacyFaxNumber)
             </dd>
-            <dt class="col-sm-2">
+            <dt class="col-sm-4">
                 @Html.DisplayNameFor(model => model.RoomNumber)
             </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.RoomNumber)
+            <dd class="col-sm-6">
+                Room @Html.DisplayFor(model => model.RoomNumber)
             </dd>
         </dl>
     </div>

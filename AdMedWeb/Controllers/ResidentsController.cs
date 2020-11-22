@@ -14,15 +14,18 @@ namespace AdMedWeb.Controllers
     public class ResidentsController : Controller
     {
         private readonly IResidentRepository _reRepo;
+        private readonly IApplicationRepository _apRepo;
         private readonly IAccountRepository _accRepo;
         private readonly IEmailSender _emailSender;
         // GUID used for contact page
         private static Guid guid;
         private static int _applicationId;
+        private static Application _application;
 
-        public ResidentsController(IResidentRepository reRepo, IAccountRepository accRepo, IEmailSender emailSender)
+        public ResidentsController(IResidentRepository reRepo, IApplicationRepository apRepo, IAccountRepository accRepo, IEmailSender emailSender)
         {
             _reRepo = reRepo;
+            _apRepo = apRepo;
             _accRepo = accRepo;
             _emailSender = emailSender;
         }
@@ -72,6 +75,7 @@ namespace AdMedWeb.Controllers
                 pcr.CellTelephoneNumber = app.PrimaryContact.CellTelephoneNumber;
                 pcr.Email = app.PrimaryContact.Email;
                 obj.PrimaryContact = pcr;
+                _application = app;
             }
             if (id == null)
             {
@@ -149,7 +153,12 @@ namespace AdMedWeb.Controllers
                                                                                             "<p>" + obj.PrimaryContact.FirstName + " " + obj.PrimaryContact.LastName + " will be contacted shortly.</p>" +
                                                                                             "<p>Username: " + obj.PrimaryContact.Email + "<br>" + "Password:" + guid + " is you new account!</p>" +
                                                                                             "<p>You can access your account on https://admedweb.azurewebsites.net/ </p>");
-                        await _reRepo.DeleteAsync(SD.ApplicationAPIPath, _applicationId, HttpContext.Session.GetString("JWToken"));
+
+                        if (_application != null)
+                        {
+                            _application.Invisible = true;
+                            await _apRepo.UpdateAsync(SD.ApplicationAPIPath + _application.Id, _application, HttpContext.Session.GetString("JWToken"));
+                        }
 
                         User user = new User()
                         {

@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                type: "GET",
+                dataType: "json",
+                contentType: "application/json",
+                url: 'VisualizeApplications',
+                success: function (result) {
+                    google.charts.load('current', {
+                        'packages': ['corechart']
+                    });
+                    google.charts.setOnLoadCallback(function () {
+                        drawChart(result);
+                    });
+                }
+            });
+
+            function drawChart(result) {
+                var data = new google.visualization.DataTable();
+                data.addColumn('string', 'Month');
+                data.addColumn('number', 'Applicants');
+                var dataArray = [];
+
+                $.each(result, function (i, obj) {
+                    dataArray.push([obj.month, obj.applicants]);
+                });
+                data.addRows(dataArray);
+
+                var columnChartOptions = {
+                    title: "Applications Performance",
+                    width: 1500,
+                    height: 650,
+                    bar: { groupWidth: "20%" },
+                };
+
+                var lineChart = new google.visualization.ColumnChart(document
+                    .getElementById('linechart_div'));
+
+                lineChart.draw(data, columnChartOptions);
+            }
+
+        });
+
+    </script>
+</head>
+
+<body>
+    <h1>Application Performance by Month</h1>
+    <div id="linechart_div"></div>
+    <h4>Please see above chart for cumulative application figures for each month this year.</h4>
+</body>
+</html>

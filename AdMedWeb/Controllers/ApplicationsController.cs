@@ -6,6 +6,10 @@ using Microsoft.AspNetCore.Mvc;
 using AdMedWeb.Models;
 using AdMedWeb.Repository.IRepository;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using AdMedWeb.Models.Analytics;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 
 namespace AdMedWeb.Controllers
 {
@@ -106,7 +110,7 @@ namespace AdMedWeb.Controllers
                     }
                     if (obj.Approval == Enums.Approvals.Decline)
                     {
-                        await _apRepo.DeleteAsync(SD.ApplicationAPIPath, obj.Id, HttpContext.Session.GetString("JWToken"));
+                        await PostUpdateApplication(obj);
                         return RedirectToAction(nameof(Index));
                     }
                     await PostUpdateApplication(obj);
@@ -135,7 +139,8 @@ namespace AdMedWeb.Controllers
         public async Task<IActionResult> GetAllApplications()
         {
 
-            var data = await _apRepo.GetAllAsync(SD.ApplicationAPIPath, HttpContext.Session.GetString("JWToken"));
+            IEnumerable<Application> data = await _apRepo.GetAllAsync(SD.ApplicationAPIPath, HttpContext.Session.GetString("JWToken"));
+            List<Application> applications = new List<Application>();
 
             if (data != null)
             {
@@ -143,7 +148,16 @@ namespace AdMedWeb.Controllers
                 {
                     item.TimeStampString = item.TimeStamp.ToString().Split(" ")[0];
                     item.DateOfBirthString = item.DateOfBirth.ToString().Split(" ")[0];
+
+                    if (item.Invisible == false)
+                    {
+                        applications.Add(item);
+                    }
+
                 }
+
+                data = applications.AsEnumerable();
+
             }
 
             return Json(new { data });
@@ -159,6 +173,97 @@ namespace AdMedWeb.Controllers
                 return Json(new { success = true, message = "Delete Successful" });
             }
             return Json(new { success = false, message = "Delete Not Successful" });
+        }
+
+        [Authorize(Roles = "Admin")]
+        public ActionResult MonthlyApplications()
+        {
+            return View();
+        }
+
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult> VisualizeApplications()
+        {
+            // Returns the view, passing in all applications as a JSON object
+            return Json(await Applications());
+        }
+
+        [Authorize(Roles = "Admin")]
+        public async Task<List<MonthlyApplicants>> Applications()
+        {
+
+            // Get current date / time in order to only get months from this year
+            DateTime now = DateTime.Today;
+
+            // Creates a list of MonthlyApplicants objects
+            List<MonthlyApplicants> monthlyApplicants = new List<MonthlyApplicants>();
+
+            // Variable used to store applicants for the months
+            int noOfApplications = 0;
+
+            IEnumerable<Application> applications = await _apRepo.GetAllAsync(SD.ApplicationAPIPath, HttpContext.Session.GetString("JWToken"));
+
+            if (applications != null)
+            {
+                List<int> months = new List<int>();
+                List<string> monthsString = new List<string>();
+
+                foreach (var item in applications)
+                {
+                    if (item.TimeStamp.Year == now.Year)
+                    {
+                        months.Add(item.TimeStamp.Month);
+                    }
+                }
+
+                months = months.Distinct().OrderBy(x => x).ToList();
+
+                foreach (var item in months)
+                {
+                    switch (item)
+                    {
+                        case 1:monthsString.Add("January"); break;
+                        case 2:monthsString.Add("February"); break;
+                        case 3:monthsString.Add("March"); break;
+                        case 4:monthsString.Add("April"); break;
+                        case 5:monthsString.Add("May"); break;
+                        case 6:monthsString.Add("June"); break;
+                        case 7:monthsString.Add("July"); break;
+                        case 8:monthsString.Add("August"); break;
+                        case 9:monthsString.Add("September"); break;
+                        case 10:monthsString.Add("October"); break;
+                        case 11:monthsString.Add("November"); break;
+                        case 12:monthsString.Add("December"); break;
+                    }
+                }
+
+                int index = 0;
+
+                // Runs foreach methods which extract applicant information and increments the noOfApplications for the months in the current year
+                foreach (var c in months)
+                {
+                    Debug.WriteLine(monthsString[index]);
+                    foreach (var item in applications)
+                    {
+                        if (item.TimeStamp.Month == c)
+                        {
+                            noOfApplications++;
+                        }
+                    }
+
+                    // Add new sales object (with product category and number of sales)
+                    monthlyApplicants.Add(new MonthlyApplicants { Month = monthsString[index], Applicants = noOfApplications });
+                    index++;
+
+                    // Reset sales counter for next category
+                    noOfApplications = 0;
+                }
+
+            }
+
+            // Return the number of sales for the category
+            return monthlyApplicants;
+
         }
     }
 }

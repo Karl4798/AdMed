@@ -49,6 +49,7 @@ namespace AdMedWeb.Models
         [Required] public string PharmacyFaxNumber { get; set; }
         public string TimeStampString { get; set; }
         public DateTime TimeStamp { get; set; }
+        public bool Invisible { get; set; }
         public PrimaryContactApplication PrimaryContact { get; set; }
         public Enums.Approvals Approval { get; set; }
         // General information of the primary contact included in PrimaryContact
