@@ -13,10 +13,12 @@ namespace AdMedWeb.Controllers
     [Authorize]
     public class ResidentsController : Controller
     {
+        // Injected dependencies
         private readonly IResidentRepository _reRepo;
         private readonly IApplicationRepository _apRepo;
         private readonly IAccountRepository _accRepo;
         private readonly IEmailSender _emailSender;
+
         // GUID used for contact page
         private static Guid guid;
         private static int _applicationId;
