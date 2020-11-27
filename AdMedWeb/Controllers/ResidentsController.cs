@@ -144,18 +144,21 @@ namespace AdMedWeb.Controllers
                     {
                         // Gets a new GUID for the contact form
                         guid = Guid.NewGuid();
-                        // Sends the email with all required information
+                        // Sends an email with all required information
                         await _emailSender.SendEmailAsync("admin@testsetup.net", "Reference Number: "
                                                                                 + guid, "<h2>Email: " + obj.PrimaryContact.Email + "</h2>"
                                                                                         + "<br>" + "<h2>Your Application Was Successful!</h2>" +
-                                                                                        "<p>" + obj.PrimaryContact.FirstName + " " + obj.PrimaryContact.LastName + " will be contacted shortly.</p>" +
-                                                                                        "<p>Username: " + obj.PrimaryContact.Email + "<br>" + "Password:" + guid + " is you new account!</p>" +
+                                                                                        "<p>" + obj.PrimaryContact.FirstName + " " + obj.PrimaryContact.LastName + " will be contacted shortly for further instruction.</p>" +
+                                                                                        "<p>The account below has been created for the primary contact:</p>" +
+                                                                                        "<p>Username: " + obj.PrimaryContact.Email + "<br>" + "Password:" + guid + "</p>" +
                                                                                         "<p>You can access your account on https://admedtech.com/ </p>");
+                        // Sends an email with all required information
                         await _emailSender.SendEmailAsync(obj.PrimaryContact.Email, "Reference Number: "
                                                                                     + guid, "<h2>Email: " + obj.PrimaryContact.Email + "</h2>"
                                                                                             + "<br>" + "<h2>Your Application Was Successful!</h2>" +
-                                                                                            "<p>" + obj.PrimaryContact.FirstName + " " + obj.PrimaryContact.LastName + " will be contacted shortly.</p>" +
-                                                                                            "<p>Username: " + obj.PrimaryContact.Email + "<br>" + "Password:" + guid + " is you new account!</p>" +
+                                                                                            "<p>The account below has been created for the primary contact:</p>" +
+                                                                                            "<p>" + obj.PrimaryContact.FirstName + " " + obj.PrimaryContact.LastName + " will be contacted shortly for further instruction.</p>" +
+                                                                                            "<p>Username: " + obj.PrimaryContact.Email + "<br>" + "Password:" + guid + "</p>" +
                                                                                             "<p>You can access your account on https://admedtech.com/ </p>");
 
                         if (_application != null)
