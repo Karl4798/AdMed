@@ -83,6 +83,7 @@ namespace AdMedWeb.Controllers
                                                                                 + guid, "<h2>Email: " + obj.PrimaryContact.Email + "</h2>"
                                                                                         + "<br>" + "<h2>Your Application is Currently Pending.</h2>" +
                                                                                         "<p>" + obj.PrimaryContact.FirstName + " " + obj.PrimaryContact.LastName + " will be contacted shortly.</p>");
+
                     await _emailSender.SendEmailAsync(obj.PrimaryContact.Email, "Reference Number: "
                                                                                 + guid, "<h2>Email: " + obj.PrimaryContact.Email + "</h2>"
                                                                                         + "<br>" + "<h2>Your Application is Currently Pending.</h2>" +

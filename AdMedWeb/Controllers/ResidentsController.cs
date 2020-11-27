@@ -150,13 +150,13 @@ namespace AdMedWeb.Controllers
                                                                                         + "<br>" + "<h2>Your Application Was Successful!</h2>" +
                                                                                         "<p>" + obj.PrimaryContact.FirstName + " " + obj.PrimaryContact.LastName + " will be contacted shortly.</p>" +
                                                                                         "<p>Username: " + obj.PrimaryContact.Email + "<br>" + "Password:" + guid + " is you new account!</p>" +
-                                                                                        "<p>You can access your account on https://admedweb.azurewebsites.net/ </p>");
+                                                                                        "<p>You can access your account on https://admedtech.com/ </p>");
                         await _emailSender.SendEmailAsync(obj.PrimaryContact.Email, "Reference Number: "
                                                                                     + guid, "<h2>Email: " + obj.PrimaryContact.Email + "</h2>"
                                                                                             + "<br>" + "<h2>Your Application Was Successful!</h2>" +
                                                                                             "<p>" + obj.PrimaryContact.FirstName + " " + obj.PrimaryContact.LastName + " will be contacted shortly.</p>" +
                                                                                             "<p>Username: " + obj.PrimaryContact.Email + "<br>" + "Password:" + guid + " is you new account!</p>" +
-                                                                                            "<p>You can access your account on https://admedweb.azurewebsites.net/ </p>");
+                                                                                            "<p>You can access your account on https://admedtech.com/ </p>");
 
                         if (_application != null)
                         {
