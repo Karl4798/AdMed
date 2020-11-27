@@ -22,6 +22,7 @@ namespace AdMedWeb.Controllers
         // GUID used for contact page
         private static Guid guid;
         private static int _applicationId;
+        private static DateTime _timeStamp;
         private static Application _application;
 
         public ResidentsController(IResidentRepository reRepo, IApplicationRepository apRepo, IAccountRepository accRepo, IEmailSender emailSender)
@@ -77,6 +78,7 @@ namespace AdMedWeb.Controllers
                 pcr.CellTelephoneNumber = app.PrimaryContact.CellTelephoneNumber;
                 pcr.Email = app.PrimaryContact.Email;
                 obj.PrimaryContact = pcr;
+
                 _application = app;
             }
             if (id == null)

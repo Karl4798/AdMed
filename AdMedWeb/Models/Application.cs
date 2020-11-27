@@ -8,11 +8,6 @@ namespace AdMedWeb.Models
     public class Application
     {
 
-        public Application()
-        {
-            TimeStamp = DateTime.Now;
-        }
-
         public int Id { get; set; }
         [DisplayName("First Name")]
         [Required] public string FirstName { get; set; }

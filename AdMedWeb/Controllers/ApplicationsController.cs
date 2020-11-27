@@ -74,6 +74,7 @@ namespace AdMedWeb.Controllers
             {
                 if (obj.Id == 0)
                 {
+                    obj.TimeStamp = DateTime.Now;
                     await _apRepo.CreateAsync(SD.ApplicationAPIPath, obj, HttpContext.Session.GetString("JWToken"));
                     // Gets a new GUID for the contact form
                     guid = Guid.NewGuid();
