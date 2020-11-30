@@ -132,27 +132,26 @@ namespace AdMedWeb.Controllers
         {
             avm.User.Role = avm.User.RolesEnum.ToString();
 
-            if (ModelState.IsValid)
+            User user = new User()
             {
-                User user = new User()
-                {
-                    Id = avm.User.Id,
-                    FirstName = avm.User.FirstName,
-                    LastName = avm.User.LastName,
-                    Username = avm.User.Username,
-                    Role = avm.User.RolesEnum.ToString()
-                };
+                Id = avm.User.Id,
+                FirstName = avm.User.FirstName,
+                LastName = avm.User.LastName,
+                Username = avm.User.Username,
+                Role = avm.User.RolesEnum.ToString()
+            };
 
-                Resident resident = await _reRepo.GetAsync(SD.ResidentAPIPath, avm.User.ResidentId, HttpContext.Session.GetString("JWToken"));
+            Resident resident = await _reRepo.GetAsync(SD.ResidentAPIPath, avm.User.ResidentId, HttpContext.Session.GetString("JWToken"));
+
+            if (resident != null)
+            {
                 resident.PrimaryContact.Email = avm.User.Username;
-
                 await _reRepo.UpdateAsync(SD.ResidentAPIPath + avm.User.ResidentId, resident, HttpContext.Session.GetString("JWToken"));
-
-                await _accRepo.UpdateAsync(SD.AccountAPIPath + user.Id, user, HttpContext.Session.GetString("JWToken"));
-
-                return RedirectToAction(nameof(Index));
             }
-            return View(avm);
+
+            await _accRepo.UpdateAsync(SD.AccountAPIPath + user.Id, user, HttpContext.Session.GetString("JWToken"));
+
+            return RedirectToAction(nameof(Index));
         }
 
         [HttpPost]
